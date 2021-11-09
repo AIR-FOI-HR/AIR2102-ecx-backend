@@ -9,7 +9,7 @@ public class User
     @Id
     @GeneratedValue
     @Column(name = "ID_USER", nullable = false)
-    private UUID id = UUID.randomUUID();
+    private UUID id;
 
     @Column(name = "USERNAME", nullable = false, length = 45)
     private String name;
