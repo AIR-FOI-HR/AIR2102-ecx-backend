@@ -16,7 +16,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
             "/configuration/security",
             "/swagger-ui/**",
             "/webjars/**",
-            "/wienerberger"
+            "/wienerberger",
+            "/h2-console/**"
     };
 
     @Override
@@ -24,5 +25,7 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
         httpSecurity
                 .authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated().and().formLogin();
+        httpSecurity.csrf().ignoringAntMatchers("/h2-console/**");
+        httpSecurity.headers().frameOptions().sameOrigin();
     }
 }
