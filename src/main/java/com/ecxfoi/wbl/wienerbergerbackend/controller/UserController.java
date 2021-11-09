@@ -27,13 +27,12 @@ public class UserController
     @PostMapping("/users")
     private UUID createUser(@RequestBody User user) {
         userService.create(user);
-        return user.getId();
+        return userService.findById(user.getId()).getId();
     }
 
     @PutMapping("/users/{id}")
-    private UUID changeUser(@PathVariable("id") UUID id, @RequestBody User user) {
+    private void changeUser(@PathVariable("id") UUID id, @RequestBody User user) {
         userService.update(id, user);
-        return user.getId();
     }
 
     @DeleteMapping("/users/{id}")
