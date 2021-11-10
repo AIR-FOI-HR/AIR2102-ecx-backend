@@ -17,7 +17,7 @@ public class Order
 
     @ManyToOne
     @JoinColumn(name = "material_number")
-    private Customer orderedMaterials;
+    private Material orderedMaterials;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "document_date")
@@ -131,12 +131,12 @@ public class Order
         this.status = status;
     }
 
-    public Customer getDocType()
+    public Material getDocType()
     {
         return orderedMaterials;
     }
 
-    public void setDocType(Customer orderedMaterials)
+    public void setDocType(Material orderedMaterials)
     {
         this.orderedMaterials = orderedMaterials;
     }
