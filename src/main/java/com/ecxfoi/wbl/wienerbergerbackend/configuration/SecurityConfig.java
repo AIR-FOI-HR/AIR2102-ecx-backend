@@ -15,14 +15,23 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
             "/configuration/ui",
             "/configuration/security",
             "/swagger-ui/**",
-            "/webjars/**",
-            "/wienerberger"
+            "/webjars/**"
+    };
+
+    private static final String[] ROUTES = {
+            "/wienerberger",
+            "/error",
+            "/h2-console",
+            "/h2-console/**",
+            "/users/**"
     };
 
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity
-                .authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll()
+                .authorizeRequests().antMatchers(ROUTES).permitAll().antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated().and().formLogin();
+        httpSecurity.csrf().ignoringAntMatchers(ROUTES);
+        httpSecurity.headers().frameOptions().sameOrigin();
     }
 }
