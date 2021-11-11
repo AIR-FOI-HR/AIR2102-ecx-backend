@@ -4,16 +4,15 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "users")
 public class User
 {
     @Id
-    @GeneratedValue
-    @Column(name = "id_user", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
     private Long id;
 
-    @ManyToMany
-    @JoinTable(name = "Customer", joinColumns = {@JoinColumn(name = "id_user")}, inverseJoinColumns = {@JoinColumn(name = "id_customer")})
+    @ManyToMany(mappedBy = "users")
     private Set<Customer> customers = new HashSet<Customer>();
 
     @Column(name = "email", length = 320)

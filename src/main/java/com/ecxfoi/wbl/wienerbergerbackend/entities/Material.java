@@ -1,14 +1,19 @@
 package com.ecxfoi.wbl.wienerbergerbackend.entities;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity
+@Entity(name = "materials")
 public class Material
 {
     @Id
-    @GeneratedValue
-    @Column(name = "material_number", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_material", nullable = false)
     private Long materialNumber;
+
+    @ManyToMany(mappedBy = "materials")
+    private Set<Order> orders = new HashSet<Order>();
 
     @Column(name = "name")
     private String name;
@@ -25,6 +30,23 @@ public class Material
 
     @Column(name = "quantity_designation", length = 5)
     private String quantityDesignation;
+
+    public Set<Order> getOrders()
+    {
+        return orders;
+    }
+
+    public void addOrders(Order order)
+    {
+        this.orders.add(order);
+        order.getMaterials().add(this);
+    }
+
+    public void removeUser(Order order)
+    {
+        this.orders.remove(order);
+        order.getMaterials().remove(this);
+    }
 
     public String getQuantityDesignation()
     {
