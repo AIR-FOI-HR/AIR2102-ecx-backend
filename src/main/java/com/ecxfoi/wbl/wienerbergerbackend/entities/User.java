@@ -8,8 +8,8 @@ import java.util.Set;
 public class User
 {
     @Id
-    @GeneratedValue
-    @Column(name = "id_user", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id_user")
     private Long id;
 
     @ManyToMany(mappedBy = "users")

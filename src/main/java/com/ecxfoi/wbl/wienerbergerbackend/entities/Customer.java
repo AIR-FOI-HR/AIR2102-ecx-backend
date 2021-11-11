@@ -8,7 +8,7 @@ import java.util.Set;
 public class Customer
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_customer", nullable = false)
     private Long id;
 

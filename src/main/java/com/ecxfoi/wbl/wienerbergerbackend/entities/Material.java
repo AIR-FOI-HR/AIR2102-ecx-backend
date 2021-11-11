@@ -8,7 +8,7 @@ import java.util.Set;
 public class Material
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_material", nullable = false)
     private Long materialNumber;
 

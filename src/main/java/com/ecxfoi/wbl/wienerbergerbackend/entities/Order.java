@@ -9,7 +9,7 @@ import java.util.Set;
 public class Order
 {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id_order", nullable = false)
     private Long idOrder;
 
