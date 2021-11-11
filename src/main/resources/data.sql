@@ -1,6 +1,6 @@
 INSERT INTO users (`first_name`,`email`,`last_name`,`password`,`phone_number`,`fax_number`,`title`)
 VALUES
-    ('Thor','fusce@outlook.com','Keith','MLU23HLC1VATK59DMP3HWPQ63IFN6T.KHM74DVF3FDED12KWL7YHUX33YRZ6CRQUGW38QRG7QCOL56IWB6MYLR79EVO9TXM','(048) 16355847','(039807) 631847','dr.'),
+    ('Testić','test@outlook.com','Ivan','sol.lozinka','(048) 16355847','(039807) 631847','scrum'),
     ('Penelope','quam.curabitur@yahoo.couk','Robertson','CCS88VQU3TFBX63OHO0IZCW30HIS7Y.YKH42RFZ0WNWP42MOX8XCHC04CIR4JORLSD76VIW2RCEC22FYU8MQKN06GFM7LXN','(01755) 7878680','(0211) 11691332','dr.'),
     ('Honorato','vitae.risus.duis@hotmail.net','Hatfield','QNZ23AOV7MHCR38CPW5MBOY93CSP0I.DNI57ONK9LGYT45BIQ4BCFC64PMD1SOAXTR17MGD6QXKJ82LGU9AFWE24XPR7NDO','(0598) 14581772','(03219) 3283921','prof.'),
     ('Brittany','phasellus@google.ca','Mccarty','LHL77HDX5WFST69PDU1WCEQ52PMU6P.DXM71GET2XYMH62DQC4FLZO75EYA8EULING27PIL3ARVS82NSA6MUHF69NHX3PHW','(008) 83646456','(0351) 32886447','ms'),
@@ -118,3 +118,122 @@ VALUES
     ('Velma','massa.lobortis.ultrices@hotmail.edu','Curry','SEC43CWC6CUKA69PUP5FTRU77TWV6T.ATE56CLA3SFQG81YUF6AYHI76NSJ1UGBBYC22JXM4BDPY71HHD6BUTO21KLR7WMM','(037451) 687724','(075) 16243082','dr.'),
     ('Mark','duis@outlook.edu','Hines','NIQ13EKO7CLAY23DID1DUUZ34MOA4U.IJJ91HJL5PFPZ44VQJ2DZUU52NJT4DDMKZI48ACB5CLLZ32WHZ6WVRO50UQY5OIU','(07386) 5376264','(050) 34641736','doc.'),
     ('Wang','porta@aol.com','Hayes','VUL73AUA7CMVV21QOX3GGKS62MLW3D.XCU87XFZ4FJVU04QON7KNLV54BPX6LLPQVI26DYF9WZZC82LUI8MUKP46KJR2NJO','(0488) 94216447','(07094) 9972346','ms');
+
+
+--
+INSERT INTO CUSTOMERS (`ADDRESS_CITY`,`ADDRESS_COUNTRY_CODE`,`ADDRESS_POST_CODE`,`ADDRESS_STREET`,`APPROVED`,`NAME`,`PARW`)
+VALUES
+    ('September','Be','18732','384-9700 Nonummy St.','n','Non Lobortis PC','yz'),
+    ('Darrel','Me','65328','7649 Consequat St.','n','Nisl Quisque Ltd','yy'),
+    ('Bell','Ge','7372 NS','5997 Orci. Av.','y','Tellus Justo Sit Limited','xx'),
+    ('Noelani','Au','54996-141','1457 Orci Ave','y','Sit Amet Ltd','zz'),
+    ('Declan','Sw','7279','876-7212 Sociosqu Road','y','Lorem Lorem Industries','zz'),
+    ('Abra','Pa','6717 NQ','715-8694 Molestie Rd.','y','Velit Pellentesque Ltd','yz'),
+    ('Haviva','Co','22512','Ap #353-1908 Nulla Road','y','Quis Turpis Incorporated','zx'),
+    ('Oleg','Ge','2478','P.O. Box 675, 7755 Amet Avenue','y','Dolor Dapibus Gravida PC','zz'),
+    ('Dustin','Pe','20632-509','P.O. Box 415, 8531 Risus, Ave','n','A Scelerisque LLP','yy'),
+    ('Rafael','Ch','307520','P.O. Box 618, 4912 At Av.','n','Tellus Sem Industries','xx');
+INSERT INTO CUSTOMERS (`ADDRESS_CITY`,`ADDRESS_COUNTRY_CODE`,`ADDRESS_POST_CODE`,`ADDRESS_STREET`,`APPROVED`,`NAME`,`PARW`)
+VALUES
+    ('Shelly','Me','31768','Ap #759-2082 Nullam St.','n','Auctor Mauris Vel Consulting','zx'),
+    ('Fay','Ge','691138','344-8253 Natoque Rd.','n','Faucibus Morbi PC','zz'),
+    ('Zachary','Ch','25770-365','3604 Odio. St.','y','Lorem Sit Associates','zx'),
+    ('Mohammad','Sp','63116','900-2252 Euismod St.','y','Mauris Aliquam Industries','yy'),
+    ('Germaine','Au','1026','976-1198 Sed Avenue','n','Mauris Inc.','yy'),
+    ('Kirsten','Ni','58851-265','838-3128 Erat Ave','y','Gravida Sagittis Duis Associates','yy'),
+    ('Paloma','Be','410774','5835 Sociis Avenue','y','Sed Incorporated','zz'),
+    ('Joelle','Br','O4W 4BY','427-7672 Varius Avenue','n','Lacinia Sed PC','xx'),
+    ('Arthur','Pa','51952','Ap #610-735 Vehicula Avenue','n','Risus Odio Ltd','yz'),
+    ('Zelenia','Sw','3136','1763 Feugiat St.','y','Mauris Aliquam Industries','zx');
+
+INSERT INTO USERS_CUSTOMERS (`ID_USER`,`ID_CUSTOMER`)
+VALUES
+    (1,1),
+    (1,2),
+    (1,3),
+    (65,7),
+    (41,12),
+    (57,15),
+    (44,15),
+    (38,8),
+    (88,8);
+INSERT INTO USERS_CUSTOMERS (`ID_USER`,`ID_CUSTOMER`)
+VALUES
+    (41,8),
+    (65,12),
+    (38,1),
+    (2,7),
+    (58,12),
+    (75,3),
+    (61,5),
+    (82,10),
+    (29,12);
+INSERT INTO USERS_CUSTOMERS (`ID_USER`,`ID_CUSTOMER`)
+VALUES
+    (30,2),
+    (68,16),
+    (61,11),
+    (53,16),
+    (29,6),
+    (21,2),
+    (44,17),
+    (89,13),
+    (94,18);
+INSERT INTO USERS_CUSTOMERS (`ID_USER`,`ID_CUSTOMER`)
+VALUES
+    (51,4),
+    (67,3),
+    (3,13),
+    (51,12),
+    (57,14),
+    (6,16),
+    (59,17),
+    (2,19),
+    (20,19);
+INSERT INTO USERS_CUSTOMERS (`ID_USER`,`ID_CUSTOMER`)
+VALUES
+    (40,16),
+    (32,6),
+    (65,18),
+    (34,20),
+    (96,13),
+    (61,4),
+    (95,14),
+    (44,2),
+    (44,19),
+    (95,1);
+INSERT INTO USERS_CUSTOMERS (`ID_USER`,`ID_CUSTOMER`)
+VALUES
+    (3,4),
+    (84,11),
+    (73,1),
+    (55,12),
+    (68,18),
+    (26,11),
+    (19,13),
+    (79,13),
+    (75,20);
+INSERT INTO USERS_CUSTOMERS (`ID_USER`,`ID_CUSTOMER`)
+VALUES
+    (95,3),
+    (14,18),
+    (46,7),
+    (80,19),
+    (23,4),
+    (20,10),
+    (29,15),
+    (31,15),
+    (30,12),
+    (7,7);
+INSERT INTO USERS_CUSTOMERS (`ID_USER`,`ID_CUSTOMER`)
+VALUES
+    (24,13),
+    (53,11),
+    (22,8),
+    (44,12),
+    (14,8),
+    (36,4),
+    (34,19),
+    (25,18),
+    (62,17),
+    (40,10);
