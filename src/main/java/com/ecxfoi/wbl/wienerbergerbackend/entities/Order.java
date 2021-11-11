@@ -2,22 +2,24 @@ package com.ecxfoi.wbl.wienerbergerbackend.entities;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
-@Entity
+@Entity(name = "orders")
 public class Order
 {
     @Id
     @GeneratedValue
-    @Column(name = "order_number", nullable = false)
-    private Long orderNumber;
+    @Column(name = "id_order", nullable = false)
+    private Long idOrder;
 
     @ManyToOne
     @JoinColumn(name = "customer_po_number", referencedColumnName = "id_customer")
     private Customer customerPONumber;
 
-    @ManyToOne
-    @JoinColumn(name = "material_number")
-    private Material orderedMaterials;
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(name = "orders_materials", joinColumns = {@JoinColumn(name = "id_order")}, inverseJoinColumns = {@JoinColumn(name = "id_material")})
+    private Set<Material> materials = new HashSet<Material>();
 
     @Temporal(TemporalType.DATE)
     @Column(name = "document_date")
@@ -131,14 +133,21 @@ public class Order
         this.status = status;
     }
 
-    public Material getDocType()
+    public Set<Material> getMaterials()
     {
-        return orderedMaterials;
+        return materials;
     }
 
-    public void setDocType(Material orderedMaterials)
+    public void addMaterials(Material material)
     {
-        this.orderedMaterials = orderedMaterials;
+        this.materials.add(material);
+        material.getOrders().add(this);
+    }
+
+    public void removeUser(Material material)
+    {
+        this.materials.remove(material);
+        material.getOrders().remove(this);
     }
 
     public Date getDocumentDate()
@@ -163,11 +172,11 @@ public class Order
 
     public Long getOrderNumber()
     {
-        return orderNumber;
+        return idOrder;
     }
 
     public void setOrderNumber(Long orderNumber)
     {
-        this.orderNumber = orderNumber;
+        this.idOrder = orderNumber;
     }
 }

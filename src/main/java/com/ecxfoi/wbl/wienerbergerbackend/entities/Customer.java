@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-@Entity
+@Entity(name = "customers")
 public class Customer
 {
     @Id
@@ -12,8 +12,8 @@ public class Customer
     @Column(name = "id_customer", nullable = false)
     private Long id;
 
-    @ManyToMany
-    @JoinTable(name = "User", joinColumns = {@JoinColumn(name = "id_customer")}, inverseJoinColumns = {@JoinColumn(name = "id_user")})
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JoinTable(name = "users_customers", joinColumns = {@JoinColumn(name = "id_customer")}, inverseJoinColumns = {@JoinColumn(name = "id_user")})
     private Set<User> users = new HashSet<User>();
 
     @Column(name = "name")
