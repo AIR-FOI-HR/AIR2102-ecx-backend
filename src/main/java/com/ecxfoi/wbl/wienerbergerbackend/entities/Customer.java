@@ -28,7 +28,7 @@ public class Customer
     @Column(name = "address_street")
     private String addressStreet;
 
-    @Column(name = "address_post_code")
+    @Column(name = "address_post_code", length = 15)
     private String addressPostCode;
 
     @Column(name = "address_city")
