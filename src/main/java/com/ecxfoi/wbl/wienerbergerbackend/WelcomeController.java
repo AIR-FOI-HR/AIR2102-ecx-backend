@@ -11,4 +11,9 @@ public class WelcomeController {
     public String getWelcome() {
         return "Welcome to Wienerberger";
     }
+
+    @RequestMapping({ "/hello" })
+    public String HelloPage() {
+        return "Hello World";
+    }
 }
