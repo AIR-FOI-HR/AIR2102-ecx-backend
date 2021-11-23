@@ -1,4 +1,4 @@
-package com.ecxfoi.wbl.wienerbergerbackend.util;
+package com.ecxfoi.wbl.wienerbergerbackend;
 
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
