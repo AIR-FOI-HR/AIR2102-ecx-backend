@@ -23,7 +23,7 @@ public class User
      * If hash is: HaSHzV341Aj, and salt is sAlT30, it should look like:
      * sAlT30.HaSHzV341Aj
      */
-    @Column(name = "password", length = 95)
+    @Column(name = "password", length = 69)
     private String password;
 
     @Column(name = "title", length = 15)
