@@ -17,9 +17,9 @@ public class Order
     @JoinColumn(name = "customer_po_number", referencedColumnName = "id_customer")
     private Customer customerPONumber;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "orders_materials", joinColumns = {@JoinColumn(name = "id_order")}, inverseJoinColumns = {@JoinColumn(name = "id_material")})
-    private Set<Material> materials = new HashSet<Material>();
+    private Set<Material> materials = new HashSet<>();
 
     @Temporal(TemporalType.DATE)
     @Column(name = "document_date")
