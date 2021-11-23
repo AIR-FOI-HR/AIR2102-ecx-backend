@@ -13,9 +13,11 @@ import java.util.Collections;
 import java.util.function.Predicate;
 
 @Configuration
-public class SwaggerConfig {
+public class SwaggerConfig
+{
     @Bean
-    public Docket apiDocket() {
+    public Docket apiDocket()
+    {
         return new Docket(DocumentationType.SWAGGER_2)
                 .select()
                 .apis(RequestHandlerSelectors.any())
@@ -25,13 +27,14 @@ public class SwaggerConfig {
                 .apiInfo(getApiInfo());
     }
 
-    private ApiInfo getApiInfo() {
+    private ApiInfo getApiInfo()
+    {
         return new ApiInfo(
                 "Wienerberger WBL",
                 "Wienerberger WBL Project - ecx.io & FOI",
                 "v0.0.1",
                 "",
-                new Contact("","",""),
+                new Contact("", "", ""),
                 "",
                 "",
                 Collections.emptyList()
