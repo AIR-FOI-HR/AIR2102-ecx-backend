@@ -1,7 +1,7 @@
 package com.ecxfoi.wbl.wienerbergerbackend.auth;
 
 import com.ecxfoi.wbl.wienerbergerbackend.entities.User;
-import com.ecxfoi.wbl.wienerbergerbackend.models.Response;
+import com.ecxfoi.wbl.wienerbergerbackend.models.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.repository.UserRepository;
 import com.ecxfoi.wbl.wienerbergerbackend.util.JwtUtil;
 import org.apache.commons.lang3.StringUtils;
@@ -42,13 +42,13 @@ public class AuthController
         }
         catch (Exception ex)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new Response(false, ex.getMessage(), new AuthenticationException(ex)));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse(false, ex.getMessage(), new AuthenticationException(ex)));
         }
 
         final String jwt = jwtUtil.generateToken(user.getId());
 
         String welcomeMessage = "Welcome, " + user.getFirstName() + "!";
-        return ResponseEntity.ok(new Response(true, welcomeMessage, new AuthenticationResponse(jwt)));
+        return ResponseEntity.ok(new WienerbergerResponse(true, welcomeMessage, new AuthenticationData(jwt)));
     }
 
     private User authenticateUser(String emailProvided, String passwordProvided) throws Exception

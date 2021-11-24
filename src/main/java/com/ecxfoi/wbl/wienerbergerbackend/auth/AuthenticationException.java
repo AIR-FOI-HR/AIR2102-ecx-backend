@@ -1,8 +1,8 @@
 package com.ecxfoi.wbl.wienerbergerbackend.auth;
 
-import com.ecxfoi.wbl.wienerbergerbackend.models.Data;
+import com.ecxfoi.wbl.wienerbergerbackend.models.WienerbergerResponseData;
 
-public class AuthenticationException implements Data
+public class AuthenticationException implements WienerbergerResponseData
 {
     public Throwable cause;
     public Throwable[] suppressed;
