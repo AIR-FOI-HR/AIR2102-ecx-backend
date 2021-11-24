@@ -1,19 +1,19 @@
 -- passwords are "test1" for everyone except for the pair "admin"-"Test1234"
 
 INSERT INTO users (`last_name`, `email`, `first_name`, `password`, `phone_number`, `fax_number`, `title`)
-VALUES ('admin', 'admin@wiener.com', 'admin', '6iFFXZ1ot+1V2YNBJ8ttyA==.LVn//EVRnSBvBp50mwgTGrNHjCwLS6lrVCPoQKgZ6ss=',
+VALUES ('admin', 'admin@wb.com', 'admin', '6iFFXZ1ot+1V2YNBJ8ttyA==.LVn//EVRnSBvBp50mwgTGrNHjCwLS6lrVCPoQKgZ6ss=',
         '(048) 16355847', '(039807) 631847', 'scrum'),
-       ('Jurić Grgić', 'luka@wiener.com', 'Luka',
+       ('Jurić Grgić', 'luka@wb.com', 'Luka',
         '3PNLE+sy8S6dfIq1IM3GNQ==.Y+yesFXlVXgvHbEj1vsl9bUarR90xHOKBMULPQXChK0=', '(01755) 7878680', '(0211) 11691332',
         'dr.'),
-       ('Matijević', 'mislav@wiener.com', 'Mislav',
+       ('Matijević', 'mislav@wb.com', 'Mislav',
         'tsqZpTysbKCx7rUXWh5TRA==.JSbuKeGkgtjZQtUwJ7QFh+G2ADerk7zM9olWnF9rYsM=', '(0598) 14581772', '(03219) 3283921',
         'prof.'),
-       ('Mustać', 'mateo@wiener.com', 'Mateo', 'kMMijQwFPHQ5lYxnasqbWg==.XuU3WnnzQbHa8I81p8BGeJgvkgTqML4rJ6xLoBkn/lo=',
+       ('Mustać', 'mateo@wb.com', 'Mateo', 'kMMijQwFPHQ5lYxnasqbWg==.XuU3WnnzQbHa8I81p8BGeJgvkgTqML4rJ6xLoBkn/lo=',
         '(008) 83646456', '(0351) 32886447', 'mr.'),
-       ('Nižić', 'mario@wiener.com', 'Mario', '+2//mjdnM8wdydXs0fySYg==.bJ/fBd/H8Ssj9HOqJX7EZG9rnuwFYw3UmZBc1rzQ19o=',
+       ('Nižić', 'mario@wb.com', 'Mario', '+2//mjdnM8wdydXs0fySYg==.bJ/fBd/H8Ssj9HOqJX7EZG9rnuwFYw3UmZBc1rzQ19o=',
         '(073) 92161434', '(038874) 178445', 'mr.'),
-       ('Posarić', 'lovro@wiener.com', 'Lovro', 'Fn8sgw9iy4j3Xom5CHuoTQ==.ejc75exCjOZs4JNwmSt6PcBjm5XCfqP1oD076L1E44Q=',
+       ('Posarić', 'lovro@wb.com', 'Lovro', 'Fn8sgw9iy4j3Xom5CHuoTQ==.ejc75exCjOZs4JNwmSt6PcBjm5XCfqP1oD076L1E44Q=',
         '(032411) 025193', '(037695) 513296', 'doc.');
 
 
