@@ -17,11 +17,15 @@ import java.util.Base64;
 @Service
 public class AuthService
 {
-    @Autowired
     UserRepository userRepository;
 
-    @Autowired
     JwtUtil jwtUtil;
+
+    public AuthService(@Autowired UserRepository userRepository, @Autowired JwtUtil jwtUtil)
+    {
+        this.userRepository = userRepository;
+        this.jwtUtil = jwtUtil;
+    }
 
     public String authenticateUser(String email, String password) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
@@ -39,8 +43,6 @@ public class AuthService
     private User checkUser(String emailProvided, String passwordProvided) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         User user = userRepository.findUserByEmail(emailProvided);
-
-        String errorMessage = "Invalid credentials";
 
         if (user == null)
         {
