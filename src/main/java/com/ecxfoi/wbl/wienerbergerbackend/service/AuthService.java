@@ -39,16 +39,14 @@ public class AuthService
 
     private User checkUser(String emailProvided, String passwordProvided) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
-        List<User> userList = userRepository.findByEmail(emailProvided);
+        User user = userRepository.findUserByEmail(emailProvided);
 
         String errorMessage = "Invalid credentials";
 
-        if (userList.isEmpty())
+        if (user == null)
         {
             return null;
         }
-
-        User user = userList.get(0);
 
         String salt = StringUtils.split(user.getPass(), '.')[0];
         String hashedPassword = StringUtils.split(user.getPass(), '.')[1];
