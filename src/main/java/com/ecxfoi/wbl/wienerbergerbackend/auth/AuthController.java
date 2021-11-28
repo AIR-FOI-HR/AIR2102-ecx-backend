@@ -2,6 +2,7 @@ package com.ecxfoi.wbl.wienerbergerbackend.auth;
 
 import com.ecxfoi.wbl.wienerbergerbackend.models.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.service.AuthService;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,36 +20,24 @@ public class AuthController
     @RequestMapping(value = "/api/login", method = RequestMethod.POST)
     public ResponseEntity<?> loginUser(@RequestBody AuthenticationRequest authenticationRequest)
     {
-        final String jwt;
-
         try
         {
-            jwt = authService.authenticateUser(authenticationRequest.getEmail(), authenticationRequest.getPassword());
+            String jwt = authService.authenticateUser(authenticationRequest.getEmail(), authenticationRequest.getPassword());
+
+            if (StringUtils.isNotEmpty(jwt))
+            {
+                return ResponseEntity.ok(new WienerbergerResponse(true, "Success!", new AuthenticationData(jwt)));
+            }
+            else
+            {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse(false, "Invalid credentials!", new AuthenticationData(jwt)));
+            }
         }
         catch (Exception ex)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse(false, ex.getMessage(), new AuthenticationException(ex)));
+            System.out.println("- Error logging in");
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new WienerbergerResponse(false, "There was an error on our side, please try again later.", new AuthenticationException(ex)));
         }
-
-        return ResponseEntity.ok(new WienerbergerResponse(true, "Success!", new AuthenticationData(jwt)));
     }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

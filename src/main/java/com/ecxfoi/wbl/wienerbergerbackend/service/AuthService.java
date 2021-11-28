@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKeyFactory;
 import javax.crypto.spec.PBEKeySpec;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Base64;
 import java.util.List;
@@ -22,15 +24,20 @@ public class AuthService
     @Autowired
     JwtUtil jwtUtil;
 
-    public String authenticateUser(String email, String password) throws Exception
+    public String authenticateUser(String email, String password) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         User user;
         user = checkUser(email, password);
 
+        if (user == null)
+        {
+            return "";
+        }
+
         return jwtUtil.generateToken(user.getId());
     }
 
-    private User checkUser(String emailProvided, String passwordProvided) throws Exception
+    private User checkUser(String emailProvided, String passwordProvided) throws NoSuchAlgorithmException, InvalidKeySpecException
     {
         List<User> userList = userRepository.findByEmail(emailProvided);
 
@@ -38,7 +45,7 @@ public class AuthService
 
         if (userList.isEmpty())
         {
-            throw new Exception(errorMessage);
+            return null;
         }
 
         User user = userList.get(0);
@@ -53,7 +60,7 @@ public class AuthService
 
         if (!StringUtils.equals(passwordProvidedHashed, hashedPassword))
         {
-            throw new Exception(errorMessage);
+            return null;
         }
 
         return user;
