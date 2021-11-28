@@ -1,8 +1,6 @@
 package com.ecxfoi.wbl.wienerbergerbackend.auth;
 
-import java.io.Serializable;
-
-public class AuthenticationData implements Serializable
+public class AuthenticationData
 {
     public final String jwt;
 

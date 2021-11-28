@@ -37,7 +37,7 @@ public class AuthController
         {
             System.out.println("- Error logging in");
             ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new WienerbergerResponse<>(false, "There was an error on our side, please try again later.", new AuthenticationException(ex)));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new WienerbergerResponse<>(false, "There was an error on our side, please try again later.", new AuthenticationErrorData(ex)));
         }
     }
 }

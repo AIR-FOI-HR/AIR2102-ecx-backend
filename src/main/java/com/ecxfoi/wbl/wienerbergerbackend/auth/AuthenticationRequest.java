@@ -1,8 +1,6 @@
 package com.ecxfoi.wbl.wienerbergerbackend.auth;
 
-import java.io.Serializable;
-
-public class AuthenticationRequest implements Serializable
+public class AuthenticationRequest
 {
     final private String password;
     final private String email;
