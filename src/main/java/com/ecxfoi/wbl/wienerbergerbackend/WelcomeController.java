@@ -5,10 +5,11 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class WelcomeController {
-
+public class WelcomeController
+{
     @RequestMapping(value = "/wienerberger", method = RequestMethod.GET)
-    public String getWelcome() {
+    public String getWelcome()
+    {
         return "Welcome to Wienerberger";
     }
 }

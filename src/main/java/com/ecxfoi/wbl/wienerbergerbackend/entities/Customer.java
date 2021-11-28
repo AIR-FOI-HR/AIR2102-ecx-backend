@@ -12,9 +12,9 @@ public class Customer
     @Column(name = "id_customer", nullable = false)
     private Long id;
 
-    @ManyToMany(cascade = { CascadeType.ALL })
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(name = "users_customers", joinColumns = {@JoinColumn(name = "id_customer")}, inverseJoinColumns = {@JoinColumn(name = "id_user")})
-    private Set<User> users = new HashSet<User>();
+    private Set<User> users = new HashSet<>();
 
     @Column(name = "name")
     private String name;

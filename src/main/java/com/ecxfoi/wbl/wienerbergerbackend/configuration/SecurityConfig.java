@@ -7,7 +7,8 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 
 @Configuration
 @EnableWebSecurity
-public class SecurityConfig  extends WebSecurityConfigurerAdapter {
+public class SecurityConfig extends WebSecurityConfigurerAdapter
+{
     private static final String[] AUTH_WHITELIST = {
             "/v2/api-docs",
             "/swagger-resources",
@@ -15,7 +16,8 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
             "/configuration/ui",
             "/configuration/security",
             "/swagger-ui/**",
-            "/webjars/**"
+            "/webjars/**",
+            "/api/login"
     };
 
     private static final String[] ROUTES = {
@@ -23,11 +25,13 @@ public class SecurityConfig  extends WebSecurityConfigurerAdapter {
             "/error",
             "/h2-console",
             "/h2-console/**",
-            "/users/**"
+            "/users/**",
+            "/api/login"
     };
 
     @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
+    protected void configure(HttpSecurity httpSecurity) throws Exception
+    {
         httpSecurity
                 .authorizeRequests().antMatchers(ROUTES).permitAll().antMatchers(AUTH_WHITELIST).permitAll()
                 .anyRequest().authenticated().and().formLogin();
