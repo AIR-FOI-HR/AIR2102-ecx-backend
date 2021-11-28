@@ -1,7 +1,5 @@
 package com.ecxfoi.wbl.wienerbergerbackend.models;
 
-import java.io.Serializable;
-
 public class WienerbergerResponse<T>
 {
     final private boolean success;
