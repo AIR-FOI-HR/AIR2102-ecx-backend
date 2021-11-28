@@ -1,8 +1,8 @@
 package com.ecxfoi.wbl.wienerbergerbackend.auth;
 
-import com.ecxfoi.wbl.wienerbergerbackend.models.WienerbergerResponseData;
+import java.io.Serializable;
 
-public class AuthenticationException implements WienerbergerResponseData
+public class AuthenticationException implements Serializable
 {
     public Throwable cause;
     public Throwable[] suppressed;

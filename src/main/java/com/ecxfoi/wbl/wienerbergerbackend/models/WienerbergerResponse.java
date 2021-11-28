@@ -2,20 +2,20 @@ package com.ecxfoi.wbl.wienerbergerbackend.models;
 
 import java.io.Serializable;
 
-public class WienerbergerResponse implements Serializable
+public class WienerbergerResponse<T>
 {
     final private boolean success;
     final private String message;
-    final private WienerbergerResponseData data;
+    final private T data;
 
-    public WienerbergerResponse(final boolean success, final String message, final WienerbergerResponseData data)
+    public WienerbergerResponse(final boolean success, final String message, final T data)
     {
         this.success = success;
         this.message = message;
         this.data = data;
     }
 
-    public WienerbergerResponseData getData()
+    public T getData()
     {
         return data;
     }

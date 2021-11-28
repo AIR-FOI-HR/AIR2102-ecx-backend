@@ -26,18 +26,18 @@ public class AuthController
 
             if (StringUtils.isNotEmpty(jwt))
             {
-                return ResponseEntity.ok(new WienerbergerResponse(true, "Success!", new AuthenticationData(jwt)));
+                return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", new AuthenticationData(jwt)));
             }
             else
             {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse(false, "Invalid credentials!", new AuthenticationData(jwt)));
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", new AuthenticationData(jwt)));
             }
         }
         catch (Exception ex)
         {
             System.out.println("- Error logging in");
             ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new WienerbergerResponse(false, "There was an error on our side, please try again later.", new AuthenticationException(ex)));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new WienerbergerResponse<>(false, "There was an error on our side, please try again later.", new AuthenticationException(ex)));
         }
     }
 }
