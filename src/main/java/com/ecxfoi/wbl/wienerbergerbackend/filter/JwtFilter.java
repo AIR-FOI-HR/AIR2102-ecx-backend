@@ -35,24 +35,30 @@ public class JwtFilter extends OncePerRequestFilter
             SecurityContextHolder.clearContext();
             final String requestToken = request.getHeader("Authorization");
 
-            Long id = null;
-            String jwt = null;
+            Long id;
+            String jwt;
 
             if (requestToken != null && requestToken.startsWith("Bearer "))
             {
                 jwt = requestToken.substring(7);
-                id = jwtUtil.validateAndExtractID(jwt);
-            }
-
-            if (id != null && SecurityContextHolder.getContext().getAuthentication() == null)
-            {
-                if (jwtUtil.validateToken(jwt))
+                try
                 {
-                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                            id, null, null);
-                    usernamePasswordAuthenticationToken
-                            .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                    id = jwtUtil.validateAndExtractID(jwt);
+                    if (id != null && SecurityContextHolder.getContext().getAuthentication() == null)
+                    {
+                        if (jwtUtil.validateToken(jwt))
+                        {
+                            UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                                    id, null, null);
+                            usernamePasswordAuthenticationToken
+                                    .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                            SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ex.printStackTrace();
                 }
             }
         }
