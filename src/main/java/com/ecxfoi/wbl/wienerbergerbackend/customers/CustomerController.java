@@ -6,7 +6,7 @@ import com.ecxfoi.wbl.wienerbergerbackend.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestHeader;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
@@ -24,25 +24,25 @@ public class CustomerController
     }
 
     @RequestMapping(value = "/api/companies", method = RequestMethod.GET)
-    public ResponseEntity<?> getCompanies(@RequestHeader("Authorization") String authorizationHeader)
+    public ResponseEntity<?> getCompanies()
     {
-        Long id = null;
-        String jwt;
+        var context = SecurityContextHolder.getContext().getAuthentication();
+        Long id;
 
-        if (authorizationHeader != null && authorizationHeader.startsWith("Bearer "))
+        try
         {
-            jwt = authorizationHeader.substring(7);
-            try
-            {
-                id = jwtUtil.validateAndExtractID(jwt);
-            }
-            catch (Exception ex)
-            {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+            id = (Long)context.getPrincipal();
+            if(id == null){
+                throw new Exception("Invalid ID.");
             }
         }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+        }
 
-        var customerCompanies = customerService.getUserCompanies(id);
-        return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", customerCompanies));
+        var userCompanies = customerService.getUserCompanies(id);
+        return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", userCompanies));
     }
 }
