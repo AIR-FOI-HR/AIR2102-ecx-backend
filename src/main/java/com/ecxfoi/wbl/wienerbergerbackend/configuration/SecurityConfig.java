@@ -26,7 +26,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             "/h2-console",
             "/h2-console/**",
             "/users/**",
-            "/api/login"
+            "/api/login",
+            "/api/companies"
     };
 
     @Override
