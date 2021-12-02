@@ -5,7 +5,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -21,9 +20,9 @@ public class JwtUtil
 
     final private String SECRET_KEY = "5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjX";
 
-    public Long extractID(String token)
+    public Long validateAndExtractID(String token)
     {
-        return Long.parseLong(extractClaim(token, Claims::getId));
+        return Long.parseLong(extractClaim(token, Claims::getSubject));
     }
 
     public Date extractExpiration(String token)
@@ -55,9 +54,9 @@ public class JwtUtil
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
-    public Boolean validateToken(String token, UserDetails userDetails)
+    public Boolean validateToken(String token)
     {
-        final Long ID = extractID(token);
+        final Long ID = validateAndExtractID(token);
         return (userRepository.findById(ID).isPresent() && !isTokenExpired(token));
     }
 }
