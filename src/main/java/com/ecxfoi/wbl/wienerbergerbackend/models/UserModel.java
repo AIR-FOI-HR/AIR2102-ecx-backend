@@ -20,4 +20,14 @@ public class UserModel
         this.fax_number = user.getFaxNumber();
         this.email = user.getEmail();
     }
+
+    public UserModel(final String title, final String first_name, final String last_name, final String phone_number, final String fax_number, final String email)
+    {
+        this.title = title;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.phone_number = phone_number;
+        this.fax_number = fax_number;
+        this.email = email;
+    }
 }
