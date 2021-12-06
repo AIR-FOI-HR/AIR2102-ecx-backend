@@ -7,6 +7,7 @@ import com.ecxfoi.wbl.wienerbergerbackend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,15 +23,24 @@ public class UserController
         this.userService = userService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "api/users/{id}")
-    public ResponseEntity<?> getUser(@PathVariable("id") Long idParams)
+    @RequestMapping(method = RequestMethod.GET, value = "api/users")
+    public ResponseEntity<?> getUser()
     {
-        if (authenticateForID(idParams))
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+        Long idJWT;
 
         try
         {
-            UserModel userModel = userService.getUserModel(idParams);
+            idJWT = getIdFromJWT();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+        }
+
+        try
+        {
+            UserModel userModel = userService.getUserModel(idJWT);
             return ResponseEntity.ok(new WienerbergerResponse<>(true, "User found!", userModel));
         }
         catch (Exception ex)
@@ -40,15 +50,24 @@ public class UserController
         }
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "api/users/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") Long idParams, @RequestBody UserModel userModel)
+    @RequestMapping(method = RequestMethod.PUT, value = "api/users")
+    public ResponseEntity<?> updateUser(@RequestBody UserModel userModel)
     {
-        if (authenticateForID(idParams))
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+        Long idJWT;
 
         try
         {
-            userService.saveUserModel(idParams, userModel);
+            idJWT = getIdFromJWT();
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+        }
+
+        try
+        {
+            userService.saveUserModel(idJWT, userModel);
             return ResponseEntity.ok(new WienerbergerResponse<>(true, "User modified!", userModel));
         }
         catch (Exception ex)
@@ -58,23 +77,14 @@ public class UserController
         }
     }
 
-    private boolean authenticateForID(@PathVariable("id") final Long idParams)
+    private Long getIdFromJWT() throws Exception
     {
-        var context = SecurityContextHolder.getContext().getAuthentication();
-        Long idJWT;
-        try
+        Authentication context = SecurityContextHolder.getContext().getAuthentication();
+        Long returnMe = (Long) context.getPrincipal();
+        if (returnMe == null)
         {
-            idJWT = (Long) context.getPrincipal();
-            if (idJWT == null || !idJWT.equals(idParams))
-            {
-                throw new Exception("Invalid idParams.");
-            }
+            throw new Exception("Invalid idParams.");
         }
-        catch (Exception ex)
-        {
-            ex.printStackTrace();
-            return true;
-        }
-        return false;
+        return returnMe;
     }
 }
