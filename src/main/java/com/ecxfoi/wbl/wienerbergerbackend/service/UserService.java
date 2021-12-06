@@ -16,9 +16,16 @@ public class UserService
         this.userRepository = userRepository;
     }
 
-    public UserModel getUser(Long ID)
+    public UserModel getUserModel(Long ID)
     {
         User user = userRepository.findUserById(ID);
         return new UserModel(user);
+    }
+
+    public void saveUserModel(final Long id, final UserModel userModel) throws Exception
+    {
+        User user = userRepository.getById(id);
+        user.parseUserModel(userModel);
+        userRepository.save(user);
     }
 }
