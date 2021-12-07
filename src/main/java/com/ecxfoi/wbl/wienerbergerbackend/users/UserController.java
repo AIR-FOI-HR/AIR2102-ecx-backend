@@ -63,7 +63,7 @@ public class UserController
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
         }
-        userModel.id = idJWT;
+        userModel.setId(idJWT);
         try
         {
             userService.saveUserModel(userModel);

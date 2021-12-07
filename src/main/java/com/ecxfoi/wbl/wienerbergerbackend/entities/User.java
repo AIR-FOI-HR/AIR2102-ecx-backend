@@ -229,11 +229,11 @@ public class User
 
     public void parseUserModel(UserModel userModel) throws Exception
     {
-        this.setTitle(userModel.title);
-        this.setFirstName(userModel.first_name);
-        this.setLastName(userModel.last_name);
-        this.setPhoneNumber(userModel.phone_number);
-        this.setFaxNumber(userModel.fax_number);
-        this.setEmail(userModel.email);
+        this.setTitle(userModel.getTitle());
+        this.setFirstName(userModel.getFirst_name());
+        this.setLastName(userModel.getLast_name());
+        this.setPhoneNumber(userModel.getPhone_number());
+        this.setFaxNumber(userModel.getFax_number());
+        this.setEmail(userModel.getEmail());
     }
 }

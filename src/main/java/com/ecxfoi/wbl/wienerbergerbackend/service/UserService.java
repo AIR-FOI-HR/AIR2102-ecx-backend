@@ -24,7 +24,7 @@ public class UserService
 
     public void saveUserModel(final UserModel userModel) throws Exception
     {
-        User user = userRepository.getById(userModel.id);
+        User user = userRepository.getById(userModel.getId());
         user.parseUserModel(userModel);
         userRepository.save(user);
     }
