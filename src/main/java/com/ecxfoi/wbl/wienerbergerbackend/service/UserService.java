@@ -22,9 +22,9 @@ public class UserService
         return new UserModel(user);
     }
 
-    public void saveUserModel(final Long id, final UserModel userModel) throws Exception
+    public void saveUserModel(final UserModel userModel) throws Exception
     {
-        User user = userRepository.getById(id);
+        User user = userRepository.getById(userModel.id);
         user.parseUserModel(userModel);
         userRepository.save(user);
     }
