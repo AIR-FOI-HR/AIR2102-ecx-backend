@@ -19,7 +19,8 @@ public class JwtFilter extends OncePerRequestFilter
 {
     private final JwtUtil jwtUtil;
 
-    public JwtFilter(@Autowired JwtUtil jwtUtil){
+    public JwtFilter(@Autowired JwtUtil jwtUtil)
+    {
         this.jwtUtil = jwtUtil;
     }
 
@@ -36,7 +37,8 @@ public class JwtFilter extends OncePerRequestFilter
 
         if (requestToken != null && requestToken.startsWith("Bearer "))
         {
-            jwt = requestToken.substring(7);
+            String[] token = requestToken.split(" ");
+            jwt = token[1];
             try
             {
                 id = jwtUtil.validateAndExtractID(jwt);
@@ -55,6 +57,7 @@ public class JwtFilter extends OncePerRequestFilter
             catch (Exception ex)
             {
                 ex.printStackTrace();
+                logger.error(ex.toString());
             }
         }
         filterChain.doFilter(request, response);
