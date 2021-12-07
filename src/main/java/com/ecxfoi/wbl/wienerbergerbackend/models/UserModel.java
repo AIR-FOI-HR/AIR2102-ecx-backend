@@ -1,9 +1,12 @@
 package com.ecxfoi.wbl.wienerbergerbackend.models;
 
 import com.ecxfoi.wbl.wienerbergerbackend.entities.User;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class UserModel
 {
+    @JsonIgnore
+    public Long id;
     public String title;
     public String first_name;
     public String last_name;
@@ -13,6 +16,7 @@ public class UserModel
 
     public UserModel(User user)
     {
+        this.id = user.getId();
         this.title = user.getTitle();
         this.first_name = user.getFirstName();
         this.last_name = user.getLastName();
