@@ -23,7 +23,7 @@ public class UserController
         this.userService = userService;
     }
 
-    @RequestMapping(method = RequestMethod.GET, value = "api/users")
+    @RequestMapping(method = RequestMethod.GET, value = "api/user")
     public ResponseEntity<?> getUser()
     {
         Long idJWT;
@@ -50,11 +50,10 @@ public class UserController
         }
     }
 
-    @RequestMapping(method = RequestMethod.PUT, value = "api/users")
+    @RequestMapping(method = RequestMethod.PUT, value = "api/user")
     public ResponseEntity<?> updateUser(@RequestBody UserModel userModel)
     {
         Long idJWT;
-
         try
         {
             idJWT = getIdFromJWT();
@@ -64,10 +63,10 @@ public class UserController
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
         }
-
+        userModel.id = idJWT;
         try
         {
-            userService.saveUserModel(idJWT, userModel);
+            userService.saveUserModel(userModel);
             return ResponseEntity.ok(new WienerbergerResponse<>(true, "User modified!", userModel));
         }
         catch (Exception ex)
@@ -80,11 +79,11 @@ public class UserController
     private Long getIdFromJWT() throws Exception
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
-        Long returnMe = (Long) context.getPrincipal();
-        if (returnMe == null)
+        Long idJWT = (Long) context.getPrincipal();
+        if (idJWT == null)
         {
-            throw new Exception("Invalid idParams.");
+            throw new Exception("Invalid idJWT.");
         }
-        return returnMe;
+        return idJWT;
     }
 }
