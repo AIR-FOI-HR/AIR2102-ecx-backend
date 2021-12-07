@@ -1,5 +1,6 @@
 package com.ecxfoi.wbl.wienerbergerbackend.service;
 
+import com.ecxfoi.wbl.wienerbergerbackend.entities.Customer;
 import com.ecxfoi.wbl.wienerbergerbackend.entities.User;
 import com.ecxfoi.wbl.wienerbergerbackend.models.CustomerModel;
 import com.ecxfoi.wbl.wienerbergerbackend.repository.UserRepository;
@@ -24,7 +25,7 @@ public class CustomerService
         User user = userRepository.findUserById(userId);
         ArrayList<CustomerModel> customerModels = new ArrayList<>();
 
-        for (var c : user.getCustomers())
+        for (Customer c : user.getCustomers())
         {
             CustomerModel customerModel = new CustomerModel();
             customerModel.id = c.getId();
