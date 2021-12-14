@@ -1,6 +1,6 @@
 package com.ecxfoi.wbl.wienerbergerbackend.service;
 
-import com.ecxfoi.wbl.wienerbergerbackend.entities.User;
+import com.ecxfoi.wbl.wienerbergerbackend.model.User;
 import com.ecxfoi.wbl.wienerbergerbackend.repository.UserRepository;
 import com.ecxfoi.wbl.wienerbergerbackend.util.JwtUtil;
 import org.apache.commons.lang3.StringUtils;

@@ -1,4 +1,4 @@
-package com.ecxfoi.wbl.wienerbergerbackend;
+package com.ecxfoi.wbl.wienerbergerbackend.controllers;
 
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;

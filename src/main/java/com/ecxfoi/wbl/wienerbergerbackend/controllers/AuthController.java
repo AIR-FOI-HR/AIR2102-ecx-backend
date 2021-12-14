@@ -1,6 +1,9 @@
-package com.ecxfoi.wbl.wienerbergerbackend.auth;
+package com.ecxfoi.wbl.wienerbergerbackend.controllers;
 
-import com.ecxfoi.wbl.wienerbergerbackend.models.WienerbergerResponse;
+import com.ecxfoi.wbl.wienerbergerbackend.auth.AuthenticationData;
+import com.ecxfoi.wbl.wienerbergerbackend.auth.AuthenticationErrorData;
+import com.ecxfoi.wbl.wienerbergerbackend.auth.AuthenticationRequest;
+import com.ecxfoi.wbl.wienerbergerbackend.response.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.service.AuthService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @Controller
 public class AuthController
 {
-    AuthService authService;
+    private final AuthService authService;
 
     public AuthController(@Autowired AuthService authService)
     {

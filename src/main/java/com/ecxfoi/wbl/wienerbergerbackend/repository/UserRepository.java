@@ -1,6 +1,6 @@
 package com.ecxfoi.wbl.wienerbergerbackend.repository;
 
-import com.ecxfoi.wbl.wienerbergerbackend.entities.User;
+import com.ecxfoi.wbl.wienerbergerbackend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

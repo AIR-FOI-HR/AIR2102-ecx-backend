@@ -1,8 +1,9 @@
 package com.ecxfoi.wbl.wienerbergerbackend.service;
 
-import com.ecxfoi.wbl.wienerbergerbackend.entities.Customer;
-import com.ecxfoi.wbl.wienerbergerbackend.entities.User;
-import com.ecxfoi.wbl.wienerbergerbackend.models.CustomerModel;
+import com.ecxfoi.wbl.wienerbergerbackend.dto.CustomerDto;
+import com.ecxfoi.wbl.wienerbergerbackend.mapper.CustomerMapper;
+import com.ecxfoi.wbl.wienerbergerbackend.model.Customer;
+import com.ecxfoi.wbl.wienerbergerbackend.model.User;
 import com.ecxfoi.wbl.wienerbergerbackend.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -13,30 +14,24 @@ import java.util.List;
 @Service
 public class CustomerService
 {
-    UserRepository userRepository;
+    private final CustomerMapper customerMapper = new CustomerMapper();
+    private final UserRepository userRepository;
 
     public CustomerService(@Autowired UserRepository userRepository)
     {
         this.userRepository = userRepository;
     }
 
-    public List<CustomerModel> getUserCompanies(Long userId)
+    public List<CustomerDto> getUserCompanies(Long userId)
     {
         User user = userRepository.findUserById(userId);
-        ArrayList<CustomerModel> customerModels = new ArrayList<>();
+        ArrayList<CustomerDto> customerDtos = new ArrayList<>();
 
         for (Customer c : user.getCustomers())
         {
-            CustomerModel customerModel = new CustomerModel();
-            customerModel.id = c.getId();
-            customerModel.name = c.getName();
-            customerModel.addressStreet = c.getAddressStreet();
-            customerModel.addressPostCode = c.getAddressPostCode();
-            customerModel.addressCity = c.getAddressCity();
-            customerModel.addressCountryCode = c.getAddressCountryCode();
-            customerModels.add(customerModel);
+            customerDtos.add(customerMapper.mapDto(c));
         }
 
-        return customerModels;
+        return customerDtos;
     }
 }
