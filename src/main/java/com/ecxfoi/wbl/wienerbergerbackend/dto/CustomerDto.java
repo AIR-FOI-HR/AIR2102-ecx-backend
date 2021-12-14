@@ -1,8 +1,11 @@
 package com.ecxfoi.wbl.wienerbergerbackend.dto;
 
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
+
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class CustomerDto
 {
-
     private Long id;
     private String name;
     private String addressStreet;

@@ -1,29 +1,32 @@
 package com.ecxfoi.wbl.wienerbergerbackend.dto;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.databind.PropertyNamingStrategies;
+import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
+@JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class UserDto
 {
     @JsonIgnore
     private Long id;
     private String title;
-    private String first_name;
-    private String last_name;
-    private String phone_number;
-    private String fax_number;
+    private String firstName;
+    private String lastName;
+    private String phoneNumber;
+    private String faxNumber;
     private String email;
 
     public UserDto()
     {
     }
 
-    public UserDto(final String title, final String first_name, final String last_name, final String phone_number, final String fax_number, final String email)
+    public UserDto(final String title, final String firstName, final String lastName, final String phoneNumber, final String faxNumber, final String email)
     {
         this.title = title;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.phone_number = phone_number;
-        this.fax_number = fax_number;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phoneNumber = phoneNumber;
+        this.faxNumber = faxNumber;
         this.email = email;
     }
 
@@ -37,24 +40,24 @@ public class UserDto
         this.title = title;
     }
 
-    public void setFirst_name(final String first_name)
+    public void setFirstName(final String firstName)
     {
-        this.first_name = first_name;
+        this.firstName = firstName;
     }
 
-    public void setLast_name(final String last_name)
+    public void setLastName(final String lastName)
     {
-        this.last_name = last_name;
+        this.lastName = lastName;
     }
 
-    public void setPhone_number(final String phone_number)
+    public void setPhoneNumber(final String phoneNumber)
     {
-        this.phone_number = phone_number;
+        this.phoneNumber = phoneNumber;
     }
 
-    public void setFax_number(final String fax_number)
+    public void setFaxNumber(final String faxNumber)
     {
-        this.fax_number = fax_number;
+        this.faxNumber = faxNumber;
     }
 
     public void setEmail(final String email)
@@ -72,24 +75,24 @@ public class UserDto
         return title;
     }
 
-    public String getFirst_name()
+    public String getFirstName()
     {
-        return first_name;
+        return firstName;
     }
 
-    public String getLast_name()
+    public String getLastName()
     {
-        return last_name;
+        return lastName;
     }
 
-    public String getPhone_number()
+    public String getPhoneNumber()
     {
-        return phone_number;
+        return phoneNumber;
     }
 
-    public String getFax_number()
+    public String getFaxNumber()
     {
-        return fax_number;
+        return faxNumber;
     }
 
     public String getEmail()

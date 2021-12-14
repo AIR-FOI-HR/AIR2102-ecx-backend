@@ -14,11 +14,12 @@ public class UserMapper implements GenericMapper<UserDto, User>
         }
 
         UserDto userDto = new UserDto();
+        userDto.setId(entity.getId());
         userDto.setTitle(entity.getTitle());
-        userDto.setFirst_name(entity.getFirstName());
-        userDto.setLast_name(entity.getLastName());
-        userDto.setPhone_number(entity.getPhoneNumber());
-        userDto.setFax_number(entity.getFaxNumber());
+        userDto.setFirstName(entity.getFirstName());
+        userDto.setLastName(entity.getLastName());
+        userDto.setPhoneNumber(entity.getPhoneNumber());
+        userDto.setFaxNumber(entity.getFaxNumber());
         userDto.setEmail(entity.getEmail());
 
         return userDto;
@@ -35,10 +36,10 @@ public class UserMapper implements GenericMapper<UserDto, User>
         User user = new User();
         user.setId(dto.getId());
         user.setTitle(dto.getTitle());
-        user.setFirstName(dto.getFirst_name());
-        user.setLastName(dto.getLast_name());
-        user.setPhoneNumber(dto.getPhone_number());
-        user.setFaxNumber(dto.getFax_number());
+        user.setFirstName(dto.getFirstName());
+        user.setLastName(dto.getLastName());
+        user.setPhoneNumber(dto.getPhoneNumber());
+        user.setFaxNumber(dto.getFaxNumber());
         user.setEmail(dto.getEmail());
 
         return user;
