@@ -1,4 +1,4 @@
-package com.ecxfoi.wbl.wienerbergerbackend.models;
+package com.ecxfoi.wbl.wienerbergerbackend.response;
 
 public class WienerbergerResponse<T>
 {

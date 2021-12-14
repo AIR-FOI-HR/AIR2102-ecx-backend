@@ -1,7 +1,7 @@
-package com.ecxfoi.wbl.wienerbergerbackend.customers;
+package com.ecxfoi.wbl.wienerbergerbackend.controllers;
 
-import com.ecxfoi.wbl.wienerbergerbackend.models.CustomerModel;
-import com.ecxfoi.wbl.wienerbergerbackend.models.WienerbergerResponse;
+import com.ecxfoi.wbl.wienerbergerbackend.dto.CustomerDto;
+import com.ecxfoi.wbl.wienerbergerbackend.response.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import java.util.List;
 @RestController
 public class CustomerController
 {
-    CustomerService customerService;
+    private final CustomerService customerService;
 
     public CustomerController(@Autowired CustomerService customerService)
     {
@@ -35,7 +35,7 @@ public class CustomerController
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
         }
 
-        List<CustomerModel> userCompanies = customerService.getUserCompanies(idJWT);
+        List<CustomerDto> userCompanies = customerService.getUserCompanies(idJWT);
         return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", userCompanies));
     }
 }

@@ -1,4 +1,4 @@
-package com.ecxfoi.wbl.wienerbergerbackend.entities;
+package com.ecxfoi.wbl.wienerbergerbackend.model;
 
 import javax.persistence.*;
 import java.util.Date;

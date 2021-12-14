@@ -1,6 +1,5 @@
-package com.ecxfoi.wbl.wienerbergerbackend.entities;
+package com.ecxfoi.wbl.wienerbergerbackend.model;
 
-import com.ecxfoi.wbl.wienerbergerbackend.models.UserModel;
 import org.apache.commons.lang3.StringUtils;
 import org.junit.Test;
 
@@ -231,15 +230,5 @@ public class User
     public void setId(Long id)
     {
         this.id = id;
-    }
-
-    public void parseUserModel(UserModel userModel) throws Exception
-    {
-        this.setTitle(userModel.getTitle());
-        this.setFirstName(userModel.getFirst_name());
-        this.setLastName(userModel.getLast_name());
-        this.setPhoneNumber(userModel.getPhone_number());
-        this.setFaxNumber(userModel.getFax_number());
-        this.setEmail(userModel.getEmail());
     }
 }

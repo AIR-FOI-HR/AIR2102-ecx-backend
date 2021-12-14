@@ -1,9 +1,8 @@
-package com.ecxfoi.wbl.wienerbergerbackend.models;
+package com.ecxfoi.wbl.wienerbergerbackend.dto;
 
-import com.ecxfoi.wbl.wienerbergerbackend.entities.User;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-public class UserModel
+public class UserDto
 {
     @JsonIgnore
     private Long id;
@@ -13,6 +12,20 @@ public class UserModel
     private String phone_number;
     private String fax_number;
     private String email;
+
+    public UserDto()
+    {
+    }
+
+    public UserDto(final String title, final String first_name, final String last_name, final String phone_number, final String fax_number, final String email)
+    {
+        this.title = title;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.phone_number = phone_number;
+        this.fax_number = fax_number;
+        this.email = email;
+    }
 
     public void setId(final Long id)
     {
@@ -47,17 +60,6 @@ public class UserModel
     public void setEmail(final String email)
     {
         this.email = email;
-    }
-
-    public UserModel(User user)
-    {
-        this.id = user.getId();
-        this.title = user.getTitle();
-        this.first_name = user.getFirstName();
-        this.last_name = user.getLastName();
-        this.phone_number = user.getPhoneNumber();
-        this.fax_number = user.getFaxNumber();
-        this.email = user.getEmail();
     }
 
     public Long getId()
@@ -95,13 +97,4 @@ public class UserModel
         return email;
     }
 
-    public UserModel(final String title, final String first_name, final String last_name, final String phone_number, final String fax_number, final String email)
-    {
-        this.title = title;
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.phone_number = phone_number;
-        this.fax_number = fax_number;
-        this.email = email;
-    }
 }
