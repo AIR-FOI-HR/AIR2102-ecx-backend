@@ -1,7 +1,6 @@
 package com.ecxfoi.wbl.wienerbergerbackend.controllers;
 
 import com.ecxfoi.wbl.wienerbergerbackend.dto.TicketDto;
-import com.ecxfoi.wbl.wienerbergerbackend.repository.UserRepository;
 import com.ecxfoi.wbl.wienerbergerbackend.response.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.service.TicketService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,21 +16,19 @@ import java.util.List;
 public class TicketController
 {
     private final TicketService ticketService;
-    private final UserRepository userRepository;
 
-    public TicketController(@Autowired TicketService ticketService, @Autowired UserRepository userRepository)
+    public TicketController(@Autowired TicketService ticketService)
     {
         this.ticketService = ticketService;
-        this.userRepository = userRepository;
     }
 
     @RequestMapping(value = "/api/tickets", method = RequestMethod.GET)
-    public  ResponseEntity<?> getTickets()
+    public ResponseEntity<?> getTickets()
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
 
-        if(idJWT == null)
+        if (idJWT == null)
         {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
         }
@@ -49,12 +46,12 @@ public class TicketController
     }
 
     @RequestMapping(value = "/api/tickets/{id}", method = RequestMethod.GET)
-    public  ResponseEntity<?> getDetailsForTicket(@PathVariable final Long id)
+    public ResponseEntity<?> getDetailsForTicket(@PathVariable final Long id)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
 
-        if(idJWT == null)
+        if (idJWT == null)
         {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
         }
@@ -77,14 +74,16 @@ public class TicketController
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
 
-        if(idJWT == null)
+        if (idJWT == null)
         {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
         }
 
+        Long id = ticketDto.getId();
+
         try
         {
-            ticketService.saveTickedDto(ticketDto);
+            ticketService.saveTickedDto(ticketDto, id);
             return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", ticketDto));
         }
         catch (Exception ex)
