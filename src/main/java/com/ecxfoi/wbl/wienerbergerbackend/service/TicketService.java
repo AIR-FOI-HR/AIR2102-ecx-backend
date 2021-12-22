@@ -29,11 +29,7 @@ public class TicketService
     {
         User user = userRepository.findUserById(userId);
         ArrayList<TicketDto> ticketDtos = new ArrayList<>();
-
-        for (Ticket ticket : user.getTickets())
-        {
-            ticketDtos.add(ticketMapper.mapDto(ticket));
-        }
+        ticketDtos.add(ticketMapper.mapDto(ticketRepository.findAllByTicketUser(user)));
 
         return ticketDtos;
     }
@@ -46,8 +42,9 @@ public class TicketService
         return ticketDto;
     }
 
-    public void saveTickedDto(final TicketDto ticketDto) throws Exception
+    public void saveTickedDto(final TicketDto ticketDto, final Long id)
     {
+        ticketDto.setId(id);
         Ticket ticket = ticketMapper.map(ticketDto);
         ticketRepository.save(ticket);
     }
