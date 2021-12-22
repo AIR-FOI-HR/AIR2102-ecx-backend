@@ -50,7 +50,7 @@ public class Order
     @Column(name = "additional_project_info")
     private String additionalProjectInfo;
 
-    @Column(name = "incoterm", length = 2)
+    @Column(name = "incoterm", length = 3)
     private String incoterm;
 
     public String getIncoterm()
