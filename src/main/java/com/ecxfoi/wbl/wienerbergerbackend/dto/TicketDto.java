@@ -1,6 +1,5 @@
 package com.ecxfoi.wbl.wienerbergerbackend.dto;
 
-import com.ecxfoi.wbl.wienerbergerbackend.model.User;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
@@ -8,7 +7,6 @@ import com.fasterxml.jackson.databind.annotation.JsonNaming;
 public class TicketDto
 {
     private Long id;
-    private User ticketUser;
     private String subject;
     private String status;
     private String message;
@@ -22,16 +20,6 @@ public class TicketDto
     public void setId(final Long id)
     {
         this.id = id;
-    }
-
-    public User getTicketUser()
-    {
-        return ticketUser;
-    }
-
-    public void setTicketUser(final User ticketUser)
-    {
-        this.ticketUser = ticketUser;
     }
 
     public String getSubject()
