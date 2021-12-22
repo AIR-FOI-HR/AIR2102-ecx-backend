@@ -20,9 +20,6 @@ public class User
     @ManyToMany(mappedBy = "users")
     private Set<Customer> customers = new HashSet<Customer>();
 
-    @OneToMany
-    private Set<Ticket> tickets = new HashSet<Ticket>();
-
     @Column(name = "email", length = 320)
     private String email;
 
@@ -66,8 +63,6 @@ public class User
     {
         return customers;
     }
-
-    public Set<Ticket> getTickets() { return tickets; }
 
     public void setCustomers(final Set<Customer> customer)
     {
