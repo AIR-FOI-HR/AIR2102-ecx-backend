@@ -8,14 +8,13 @@ public class TicketMapper implements GenericMapper<TicketDto, Ticket>
     @Override
     public TicketDto mapDto(final Ticket entity)
     {
-        if(entity == null)
+        if (entity == null)
         {
             return null;
         }
         TicketDto ticketDto = new TicketDto();
 
         ticketDto.setId(entity.getIdTicket());
-        ticketDto.setTicketUser(entity.getTicketUser());
         ticketDto.setSubject(entity.getSubject());
         ticketDto.setStatus(entity.getStatus());
         ticketDto.setMessage(entity.getMessage());
@@ -27,14 +26,13 @@ public class TicketMapper implements GenericMapper<TicketDto, Ticket>
     @Override
     public Ticket map(final TicketDto dto)
     {
-        if(dto == null)
+        if (dto == null)
         {
             return null;
         }
         Ticket ticket = new Ticket();
 
         ticket.setIdTicket(dto.getId());
-        ticket.setTicketUser(dto.getTicketUser());
         ticket.setSubject(dto.getSubject());
         ticket.setStatus(dto.getStatus());
         ticket.setMessage(dto.getMessage());
