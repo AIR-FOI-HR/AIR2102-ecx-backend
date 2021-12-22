@@ -79,11 +79,9 @@ public class TicketController
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
         }
 
-        Long id = ticketDto.getId();
-
         try
         {
-            ticketService.saveTickedDto(ticketDto, id);
+            ticketService.createTicket(ticketDto, idJWT);
             return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", ticketDto));
         }
         catch (Exception ex)
