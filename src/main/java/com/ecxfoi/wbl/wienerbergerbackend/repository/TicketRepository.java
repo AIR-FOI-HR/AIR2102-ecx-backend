@@ -5,10 +5,12 @@ import com.ecxfoi.wbl.wienerbergerbackend.model.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 @Repository
 public interface TicketRepository extends JpaRepository<Ticket, Long>
 {
     Ticket findTicketByIdTicket(Long id);
 
-    Ticket findAllByTicketUser(User user);
+    List<Ticket> findAllByTicketUser(User user);
 }
