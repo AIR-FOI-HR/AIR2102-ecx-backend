@@ -38,9 +38,14 @@ public class TicketService
         return ticketDtos;
     }
 
-    public TicketDto getTicketForUser(final Long ticketId)
+    public TicketDto getTicketDetails(final Long ticketId, final Long userId)
     {
         Ticket ticket = ticketRepository.findTicketByIdTicket(ticketId);
+
+        if (ticket.getTicketUser().getId() != userId)
+        {
+            return null;
+        }
 
         return ticketMapper.mapDto(ticket);
     }

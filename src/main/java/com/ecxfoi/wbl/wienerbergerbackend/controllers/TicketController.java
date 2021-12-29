@@ -58,7 +58,13 @@ public class TicketController
 
         try
         {
-            TicketDto userTicket = ticketService.getTicketForUser(id);
+            TicketDto userTicket = ticketService.getTicketDetails(id, idJWT);
+
+            if (userTicket == null)
+            {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "You are not permitted to read other user's tickets!", null));
+            }
+
             return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", userTicket));
         }
         catch (Exception ex)
