@@ -74,7 +74,7 @@ public class TicketController
         }
     }
 
-    @RequestMapping(value = "api/tickets", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/tickets", method = RequestMethod.POST)
     public ResponseEntity<?> createNewTicket(@RequestBody TicketDto ticketDto)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
