@@ -53,6 +53,16 @@ public class Order
     @Column(name = "incoterm", length = 3)
     private String incoterm;
 
+    public Long getIdOrder()
+    {
+        return idOrder;
+    }
+
+    public void setIdOrder(final Long idOrder)
+    {
+        this.idOrder = idOrder;
+    }
+
     public String getIncoterm()
     {
         return incoterm;
@@ -144,7 +154,7 @@ public class Order
         material.getOrders().add(this);
     }
 
-    public void removeUser(Material material)
+    public void removeMaterial(Material material)
     {
         this.materials.remove(material);
         material.getOrders().remove(this);
