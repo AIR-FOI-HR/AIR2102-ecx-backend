@@ -27,7 +27,14 @@ public class UserService
 
     public void saveUserDto(final UserDto userDto) throws Exception
     {
-        User user = userMapper.map(userDto);
-        userRepository.save(user);
+        User updatedUser = userMapper.map(userDto);
+
+        if (updatedUser.getId() != null)
+        {
+            User oldUser = userRepository.getById(updatedUser.getId());
+            updatedUser.setPass(oldUser.getPass());
+        }
+
+        userRepository.save(updatedUser);
     }
 }
