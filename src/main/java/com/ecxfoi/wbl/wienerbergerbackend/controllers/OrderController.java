@@ -1,5 +1,6 @@
 package com.ecxfoi.wbl.wienerbergerbackend.controllers;
 
+import com.ecxfoi.wbl.wienerbergerbackend.dto.OrderDetailsDto;
 import com.ecxfoi.wbl.wienerbergerbackend.dto.OrderDto;
 import com.ecxfoi.wbl.wienerbergerbackend.response.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.service.OrderService;
@@ -7,10 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -44,6 +42,35 @@ public class OrderController
         {
             ex.printStackTrace();
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Orders not found!", null));
+        }
+    }
+
+    @RequestMapping(value = "/api/orders/{orderId}", method = RequestMethod.POST)
+    public ResponseEntity<?> getOrderDetails(@PathVariable Long orderId)
+    {
+        Authentication context = SecurityContextHolder.getContext().getAuthentication();
+        Long idJWT = context != null ? (Long) context.getPrincipal() : null;
+
+        if (idJWT == null)
+        {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+        }
+
+        try
+        {
+            OrderDetailsDto orderDetails = orderService.getOrderDetails(idJWT, orderId);
+
+            if(orderDetails == null)
+            {
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "You are not authorized to get details of this order!", null));
+            }
+
+            return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", orderDetails));
+        }
+        catch (Exception ex)
+        {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Order not found!", null));
         }
     }
 }
