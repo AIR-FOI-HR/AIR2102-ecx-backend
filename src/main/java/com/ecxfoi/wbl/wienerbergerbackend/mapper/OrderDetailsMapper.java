@@ -18,7 +18,6 @@ public class OrderDetailsMapper implements GenericMapper<OrderDetailsDto, Order>
         OrderDetailsDto orderDto = new OrderDetailsDto();
 
         orderDto.setId(entity.getIdOrder());
-        //orderDto.setName(entity.getName()); //TODO: determine whether Name atribute is needed
         orderDto.setStatus(entity.getStatus());
         orderDto.setDate(entity.getDocumentDate());
         orderDto.setDeliveryDate(entity.getWishDeliveryDate());
@@ -40,7 +39,6 @@ public class OrderDetailsMapper implements GenericMapper<OrderDetailsDto, Order>
         Order order = new Order();
 
         order.setIdOrder(dto.getId());
-        //orderDto.setName(entity.getName());
         order.setStatus(dto.getStatus());
         order.setDocumentDate(dto.getDate());
         order.setWishDeliveryDate(dto.getDeliveryDate());

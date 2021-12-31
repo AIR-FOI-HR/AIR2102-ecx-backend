@@ -9,7 +9,6 @@ import java.util.Date;
 public class OrderDto
 {
     private Long id;
-    private String name;
     private String status;
     private Date date;
     private String paymentMethod;
@@ -19,10 +18,9 @@ public class OrderDto
     {
     }
 
-    public OrderDto(final Long id, final String name, final String status, final Date date, final String paymentMethod, final Date deliveryDate)
+    public OrderDto(final Long id, final String status, final Date date, final String paymentMethod, final Date deliveryDate)
     {
         this.id = id;
-        this.name = name;
         this.status = status;
         this.date = date;
         this.paymentMethod = paymentMethod;
@@ -37,16 +35,6 @@ public class OrderDto
     public void setId(final Long id)
     {
         this.id = id;
-    }
-
-    public String getName()
-    {
-        return name;
-    }
-
-    public void setName(final String name)
-    {
-        this.name = name;
     }
 
     public String getStatus()
