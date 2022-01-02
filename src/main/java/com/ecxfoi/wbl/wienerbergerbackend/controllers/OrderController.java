@@ -23,8 +23,8 @@ public class OrderController
         this.orderService = orderService;
     }
 
-    @RequestMapping(value = "/api/orders", method = RequestMethod.POST)
-    public ResponseEntity<?> getOrdersForACustomer(@RequestBody Long customerId)
+    @RequestMapping(value = "/api/orders/{customerId}", method = RequestMethod.GET)
+    public ResponseEntity<?> getOrdersForACustomer(@PathVariable Long customerId)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
@@ -46,7 +46,7 @@ public class OrderController
         }
     }
 
-    @RequestMapping(value = "/api/orders/{orderId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/orders/details/{orderId}", method = RequestMethod.GET)
     public ResponseEntity<?> getOrderDetails(@PathVariable Long orderId)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
@@ -75,7 +75,7 @@ public class OrderController
         }
     }
 
-    @RequestMapping(value = "/api/orders/{orderId}", method = RequestMethod.POST)
+    @RequestMapping(value = "/api/orders/{orderId}", method = RequestMethod.PUT)
     public ResponseEntity<?> updateOrderStatus(@PathVariable Long orderId, @RequestBody OrderStatusDto orderStatusDto)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
@@ -85,6 +85,8 @@ public class OrderController
         {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
         }
+
+        orderStatusDto.setId(orderId);
 
         try
         {
@@ -98,7 +100,13 @@ public class OrderController
         catch (Exception ex)
         {
             ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Error while updating order!", ex.getMessage()));
+
+            if(ex instanceof NullPointerException)
+            {
+                return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Order with supplied ID doesn't exist!", null));
+            }
+
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(new WienerbergerResponse<>(false, "Error while updating order!", ex.getMessage()));
         }
     }
 }
