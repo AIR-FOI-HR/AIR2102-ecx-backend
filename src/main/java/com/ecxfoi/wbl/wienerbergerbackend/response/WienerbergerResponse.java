@@ -2,9 +2,9 @@ package com.ecxfoi.wbl.wienerbergerbackend.response;
 
 public class WienerbergerResponse<T>
 {
-    final private boolean success;
-    final private String message;
-    final private T data;
+    private final boolean success;
+    private final String message;
+    private final T data;
 
     public WienerbergerResponse(final boolean success, final String message, final T data)
     {

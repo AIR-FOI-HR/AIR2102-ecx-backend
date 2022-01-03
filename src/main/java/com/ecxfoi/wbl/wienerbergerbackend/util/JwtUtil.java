@@ -18,7 +18,7 @@ public class JwtUtil
     @Autowired
     UserRepository userRepository;
 
-    final private String SECRET_KEY = "5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjX";
+    private static final String SECRET_KEY = "5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjX";
 
     public Long validateAndExtractID(String token)
     {

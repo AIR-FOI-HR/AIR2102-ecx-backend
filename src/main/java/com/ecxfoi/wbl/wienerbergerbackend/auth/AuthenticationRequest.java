@@ -2,8 +2,8 @@ package com.ecxfoi.wbl.wienerbergerbackend.auth;
 
 public class AuthenticationRequest
 {
-    final private String password;
-    final private String email;
+    private final String password;
+    private final String email;
 
     public AuthenticationRequest(final String password, final String email)
     {
