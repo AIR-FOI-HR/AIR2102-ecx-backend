@@ -42,7 +42,7 @@ public class TicketService
     {
         Ticket ticket = ticketRepository.findTicketByIdTicket(ticketId);
 
-        if (ticket.getTicketUser().getId() != userId)
+        if (ticket.getTicketUser().getId().equals(userId))
         {
             return null;
         }
@@ -53,7 +53,7 @@ public class TicketService
     public void createTicket(final TicketDto ticketDto, final Long idUser)
     {
         ticketDto.setStatus("New");
-        ticketDto.setResolve_message("");
+        ticketDto.setResolveMessage("");
         Ticket ticket = ticketMapper.map(ticketDto);
         ticket.setTicketUser(userRepository.findUserById(idUser));
         ticketRepository.save(ticket);

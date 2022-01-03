@@ -46,10 +46,10 @@ public class JwtUtil
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(Long ID)
+    public String generateToken(Long id)
     {
         Map<String, Object> claims = new HashMap<>();
-        return Jwts.builder().setClaims(claims).setSubject(ID.toString()).setIssuedAt(new Date(System.currentTimeMillis()))
+        return Jwts.builder().setClaims(claims).setSubject(id.toString()).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }

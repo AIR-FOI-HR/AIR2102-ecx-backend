@@ -5,7 +5,6 @@ import com.ecxfoi.wbl.wienerbergerbackend.dto.OrderDto;
 import com.ecxfoi.wbl.wienerbergerbackend.dto.OrderStatusDto;
 import com.ecxfoi.wbl.wienerbergerbackend.mapper.OrderDetailsMapper;
 import com.ecxfoi.wbl.wienerbergerbackend.mapper.OrderMapper;
-import com.ecxfoi.wbl.wienerbergerbackend.mapper.OrderStatusMapper;
 import com.ecxfoi.wbl.wienerbergerbackend.model.Customer;
 import com.ecxfoi.wbl.wienerbergerbackend.model.Order;
 import com.ecxfoi.wbl.wienerbergerbackend.model.User;
@@ -22,19 +21,17 @@ public class OrderService
 {
     private final OrderMapper orderMapper;
     private final OrderDetailsMapper orderDetailsMapper;
-    private final OrderStatusMapper orderStatusMapper;
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
     private final UserRepository userRepository;
 
-    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, UserRepository userRepository, CustomerRepository customerRepository, OrderDetailsMapper orderDetailsMapper, OrderStatusMapper orderStatusMapper)
+    public OrderService(OrderRepository orderRepository, OrderMapper orderMapper, UserRepository userRepository, CustomerRepository customerRepository, OrderDetailsMapper orderDetailsMapper)
     {
         this.orderRepository = orderRepository;
         this.orderMapper = orderMapper;
         this.customerRepository = customerRepository;
         this.userRepository = userRepository;
         this.orderDetailsMapper = orderDetailsMapper;
-        this.orderStatusMapper = orderStatusMapper;
     }
 
     public List<OrderDto> getOrdersForACustomer(Long userId, Long customerId)

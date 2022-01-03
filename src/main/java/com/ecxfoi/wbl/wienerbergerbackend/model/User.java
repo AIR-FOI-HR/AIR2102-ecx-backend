@@ -18,7 +18,7 @@ public class User
     private Long id;
 
     @ManyToMany(mappedBy = "users")
-    private Set<Customer> customers = new HashSet<Customer>();
+    private Set<Customer> customers = new HashSet<>();
 
     @Column(name = "email", length = 320)
     private String email;

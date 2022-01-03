@@ -10,7 +10,7 @@ public class TicketDto
     private String subject;
     private String status;
     private String message;
-    private String resolve_message;
+    private String resolveMessage;
 
     public Long getId()
     {
@@ -52,13 +52,13 @@ public class TicketDto
         this.message = message;
     }
 
-    public String getResolve_message()
+    public String getResolveMessage()
     {
-        return resolve_message;
+        return resolveMessage;
     }
 
-    public void setResolve_message(final String resolve_message)
+    public void setResolveMessage(final String resolveMessage)
     {
-        this.resolve_message = resolve_message;
+        this.resolveMessage = resolveMessage;
     }
 }

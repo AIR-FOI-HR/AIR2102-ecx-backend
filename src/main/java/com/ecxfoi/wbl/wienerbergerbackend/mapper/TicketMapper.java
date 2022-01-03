@@ -18,7 +18,7 @@ public class TicketMapper implements GenericMapper<TicketDto, Ticket>
         ticketDto.setSubject(entity.getSubject());
         ticketDto.setStatus(entity.getStatus());
         ticketDto.setMessage(entity.getMessage());
-        ticketDto.setResolve_message(entity.getResolveMessage());
+        ticketDto.setResolveMessage(entity.getResolveMessage());
 
         return ticketDto;
     }
@@ -36,7 +36,7 @@ public class TicketMapper implements GenericMapper<TicketDto, Ticket>
         ticket.setSubject(dto.getSubject());
         ticket.setStatus(dto.getStatus());
         ticket.setMessage(dto.getMessage());
-        ticket.setResolveMessage(dto.getResolve_message());
+        ticket.setResolveMessage(dto.getResolveMessage());
 
         return ticket;
     }

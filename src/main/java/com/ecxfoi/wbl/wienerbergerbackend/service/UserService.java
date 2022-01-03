@@ -19,9 +19,9 @@ public class UserService
         this.userMapper = new UserMapper();
     }
 
-    public UserDto getUserDto(Long ID)
+    public UserDto getUserDto(Long id)
     {
-        User user = userRepository.findUserById(ID);
+        User user = userRepository.findUserById(id);
         return userMapper.mapDto(user);
     }
 
