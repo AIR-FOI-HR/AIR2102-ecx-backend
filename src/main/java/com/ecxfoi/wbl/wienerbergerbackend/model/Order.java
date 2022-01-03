@@ -179,14 +179,4 @@ public class Order
     {
         this.customerPONumber = customerPONumber;
     }
-
-    public Long getOrderNumber()
-    {
-        return idOrder;
-    }
-
-    public void setOrderNumber(Long orderNumber)
-    {
-        this.idOrder = orderNumber;
-    }
 }
