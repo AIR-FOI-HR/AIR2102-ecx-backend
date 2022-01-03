@@ -5,6 +5,7 @@ import com.ecxfoi.wbl.wienerbergerbackend.dto.OrderDto;
 import com.ecxfoi.wbl.wienerbergerbackend.dto.OrderStatusDto;
 import com.ecxfoi.wbl.wienerbergerbackend.response.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.service.OrderService;
+import com.ecxfoi.wbl.wienerbergerbackend.util.Constants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -31,13 +32,13 @@ public class OrderController
 
         if (idJWT == null)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, Constants.INVALID_CREDENTIALS, null));
         }
 
         try
         {
             List<OrderDto> customerOrders = orderService.getOrdersForACustomer(idJWT, customerId);
-            return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", customerOrders));
+            return ResponseEntity.ok(new WienerbergerResponse<>(true, Constants.SUCCESS, customerOrders));
         }
         catch (Exception ex)
         {
@@ -54,7 +55,7 @@ public class OrderController
 
         if (idJWT == null)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, Constants.INVALID_CREDENTIALS, null));
         }
 
         try
@@ -66,7 +67,7 @@ public class OrderController
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "You are not authorized to get details of this order!", null));
             }
 
-            return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", orderDetails));
+            return ResponseEntity.ok(new WienerbergerResponse<>(true, Constants.SUCCESS, orderDetails));
         }
         catch (Exception ex)
         {
@@ -83,7 +84,7 @@ public class OrderController
 
         if (idJWT == null)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, Constants.INVALID_CREDENTIALS, null));
         }
 
         orderStatusDto.setId(orderId);

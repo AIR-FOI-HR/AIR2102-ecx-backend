@@ -5,6 +5,7 @@ import com.ecxfoi.wbl.wienerbergerbackend.auth.AuthenticationErrorData;
 import com.ecxfoi.wbl.wienerbergerbackend.auth.AuthenticationRequest;
 import com.ecxfoi.wbl.wienerbergerbackend.response.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.service.AuthService;
+import com.ecxfoi.wbl.wienerbergerbackend.util.Constants;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -32,11 +33,11 @@ public class AuthController
 
             if (StringUtils.isNotEmpty(jwt))
             {
-                return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", new AuthenticationData(jwt)));
+                return ResponseEntity.ok(new WienerbergerResponse<>(true, Constants.SUCCESS, new AuthenticationData(jwt)));
             }
             else
             {
-                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", new AuthenticationData(jwt)));
+                return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, Constants.INVALID_CREDENTIALS, new AuthenticationData(jwt)));
             }
         }
         catch (Exception ex)

@@ -3,6 +3,7 @@ package com.ecxfoi.wbl.wienerbergerbackend.controllers;
 import com.ecxfoi.wbl.wienerbergerbackend.dto.TicketDto;
 import com.ecxfoi.wbl.wienerbergerbackend.response.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.service.TicketService;
+import com.ecxfoi.wbl.wienerbergerbackend.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,13 +31,13 @@ public class TicketController
 
         if (idJWT == null)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, Constants.INVALID_CREDENTIALS, null));
         }
 
         try
         {
             List<TicketDto> userTickets = ticketService.getTicketsForUser(idJWT);
-            return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", userTickets));
+            return ResponseEntity.ok(new WienerbergerResponse<>(true, Constants.SUCCESS, userTickets));
         }
         catch (Exception ex)
         {
@@ -53,7 +54,7 @@ public class TicketController
 
         if (idJWT == null)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, Constants.INVALID_CREDENTIALS, null));
         }
 
         try
@@ -65,7 +66,7 @@ public class TicketController
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "You are not permitted to read other user's tickets!", null));
             }
 
-            return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", userTicket));
+            return ResponseEntity.ok(new WienerbergerResponse<>(true, Constants.SUCCESS, userTicket));
         }
         catch (Exception ex)
         {
@@ -82,13 +83,13 @@ public class TicketController
 
         if (idJWT == null)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, Constants.INVALID_CREDENTIALS, null));
         }
 
         try
         {
             ticketService.createTicket(ticketDto, idJWT);
-            return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", ticketDto));
+            return ResponseEntity.ok(new WienerbergerResponse<>(true, Constants.SUCCESS, ticketDto));
         }
         catch (Exception ex)
         {
