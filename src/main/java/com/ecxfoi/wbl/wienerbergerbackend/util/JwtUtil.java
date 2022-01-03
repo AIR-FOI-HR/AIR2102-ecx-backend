@@ -41,7 +41,7 @@ public class JwtUtil
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
-    private Boolean isTokenExpired(String token)
+    private boolean isTokenExpired(String token)
     {
         return extractExpiration(token).before(new Date());
     }
@@ -54,7 +54,7 @@ public class JwtUtil
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
-    public Boolean validateToken(String token)
+    public boolean validateToken(String token)
     {
         final Long ID = validateAndExtractID(token);
         return (userRepository.findById(ID).isPresent() && !isTokenExpired(token));
