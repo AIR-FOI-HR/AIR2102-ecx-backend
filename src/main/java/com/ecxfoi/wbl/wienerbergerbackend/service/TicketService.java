@@ -42,7 +42,7 @@ public class TicketService
     {
         Ticket ticket = ticketRepository.findTicketByIdTicket(ticketId);
 
-        if (ticket.getTicketUser().getId().equals(userId))
+        if (!ticket.getTicketUser().getId().equals(userId))
         {
             return null;
         }
