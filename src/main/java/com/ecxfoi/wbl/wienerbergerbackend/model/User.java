@@ -125,7 +125,7 @@ public class User
         return lastName;
     }
 
-    public void setLastName(String lastName) throws Exception
+    public void setLastName(String lastName) throws InvalidNameException
     {
         if (StringUtils.length(lastName) == 0)
         {

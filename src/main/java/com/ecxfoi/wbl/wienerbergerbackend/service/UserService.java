@@ -1,6 +1,7 @@
 package com.ecxfoi.wbl.wienerbergerbackend.service;
 
 import com.ecxfoi.wbl.wienerbergerbackend.dto.UserDto;
+import com.ecxfoi.wbl.wienerbergerbackend.exceptions.*;
 import com.ecxfoi.wbl.wienerbergerbackend.mapper.UserMapper;
 import com.ecxfoi.wbl.wienerbergerbackend.model.User;
 import com.ecxfoi.wbl.wienerbergerbackend.repository.UserRepository;
@@ -25,7 +26,7 @@ public class UserService
         return userMapper.mapDto(user);
     }
 
-    public void saveUserDto(final UserDto userDto) throws Exception
+    public void saveUserDto(final UserDto userDto) throws InvalidNameException, InvalidPhoneNumberException, InvalidTitleException, InvalidEmailException
     {
         User updatedUser = userMapper.map(userDto);
 

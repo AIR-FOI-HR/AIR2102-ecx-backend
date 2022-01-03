@@ -27,7 +27,7 @@ public class UserMapper implements GenericMapper<UserDto, User>
     }
 
     @Override
-    public User map(final UserDto dto) throws Exception
+    public User map(final UserDto dto) throws InvalidTitleException, InvalidNameException, InvalidPhoneNumberException, InvalidEmailException
     {
         if (dto == null)
         {
