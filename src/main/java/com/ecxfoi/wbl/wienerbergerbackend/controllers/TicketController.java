@@ -22,7 +22,7 @@ public class TicketController
         this.ticketService = ticketService;
     }
 
-    @RequestMapping(value = "/api/tickets", method = RequestMethod.GET)
+    @GetMapping(value = "/api/tickets")
     public ResponseEntity<?> getTickets()
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
@@ -45,7 +45,7 @@ public class TicketController
         }
     }
 
-    @RequestMapping(value = "/api/tickets/{id}", method = RequestMethod.GET)
+    @GetMapping(value = "/api/tickets/{id}")
     public ResponseEntity<?> getDetailsForTicket(@PathVariable final Long id)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
@@ -74,7 +74,7 @@ public class TicketController
         }
     }
 
-    @RequestMapping(value = "/api/tickets", method = RequestMethod.POST)
+    @PostMapping(value = "/api/tickets")
     public ResponseEntity<?> createNewTicket(@RequestBody TicketDto ticketDto)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();

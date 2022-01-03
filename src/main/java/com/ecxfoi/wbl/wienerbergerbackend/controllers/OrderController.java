@@ -23,7 +23,7 @@ public class OrderController
         this.orderService = orderService;
     }
 
-    @RequestMapping(value = "/api/orders/{customerId}", method = RequestMethod.GET)
+    @GetMapping(value = "/api/orders/{customerId}")
     public ResponseEntity<?> getOrdersForACustomer(@PathVariable Long customerId)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
@@ -46,7 +46,7 @@ public class OrderController
         }
     }
 
-    @RequestMapping(value = "/api/orders/details/{orderId}", method = RequestMethod.GET)
+    @GetMapping(value = "/api/orders/details/{orderId}")
     public ResponseEntity<?> getOrderDetails(@PathVariable Long orderId)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
@@ -75,7 +75,7 @@ public class OrderController
         }
     }
 
-    @RequestMapping(value = "/api/orders/{orderId}", method = RequestMethod.PUT)
+    @PutMapping(value = "/api/orders/{orderId}")
     public ResponseEntity<?> updateOrderStatus(@PathVariable Long orderId, @RequestBody OrderStatusDto orderStatusDto)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
