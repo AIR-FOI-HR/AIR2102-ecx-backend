@@ -1,5 +1,7 @@
 package com.ecxfoi.wbl.wienerbergerbackend.model;
 
+import com.ecxfoi.wbl.wienerbergerbackend.util.TicketStatusEnumConveter;
+
 import javax.persistence.*;
 
 @Entity(name = "tickets")
@@ -18,7 +20,8 @@ public class Ticket
     private String subject;
 
     @Column(name = "status")
-    private String status;
+    @Convert(converter = TicketStatusEnumConveter.class)
+    private TicketStatus status;
 
     @Column(name = "message")
     private String message;
@@ -56,12 +59,12 @@ public class Ticket
         this.subject = subject;
     }
 
-    public String getStatus()
+    public TicketStatus getStatus()
     {
         return status;
     }
 
-    public void setStatus(final String status)
+    public void setStatus(final TicketStatus status)
     {
         this.status = status;
     }

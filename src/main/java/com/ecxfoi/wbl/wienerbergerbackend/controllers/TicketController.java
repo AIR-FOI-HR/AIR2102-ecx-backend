@@ -1,5 +1,6 @@
 package com.ecxfoi.wbl.wienerbergerbackend.controllers;
 
+import com.ecxfoi.wbl.wienerbergerbackend.dto.TicketDetailsDto;
 import com.ecxfoi.wbl.wienerbergerbackend.dto.TicketDto;
 import com.ecxfoi.wbl.wienerbergerbackend.response.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.service.TicketService;
@@ -47,7 +48,7 @@ public class TicketController
     }
 
     @GetMapping(value = "/api/tickets/{id}")
-    public ResponseEntity<WienerbergerResponse<TicketDto>> getDetailsForTicket(@PathVariable final Long id)
+    public ResponseEntity<WienerbergerResponse<TicketDetailsDto>> getDetailsForTicket(@PathVariable final Long id)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
@@ -59,7 +60,7 @@ public class TicketController
 
         try
         {
-            TicketDto userTicket = ticketService.getTicketDetails(id, idJWT);
+            TicketDetailsDto userTicket = ticketService.getTicketDetails(id, idJWT);
 
             if (userTicket == null)
             {
@@ -76,7 +77,7 @@ public class TicketController
     }
 
     @PostMapping(value = "/api/tickets")
-    public ResponseEntity<WienerbergerResponse<TicketDto>> createNewTicket(@RequestBody TicketDto ticketDto)
+    public ResponseEntity<WienerbergerResponse<TicketDetailsDto>> createNewTicket(@RequestBody TicketDetailsDto ticketDto)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;

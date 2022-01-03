@@ -5,11 +5,13 @@ import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class TicketDto
+public class TicketDetailsDto
 {
     private Long id;
     private String subject;
     private TicketStatus status;
+    private String message;
+    private String resolveMessage;
 
     public Long getId()
     {
@@ -39,5 +41,25 @@ public class TicketDto
     public void setStatus(final TicketStatus status)
     {
         this.status = status;
+    }
+
+    public String getMessage()
+    {
+        return message;
+    }
+
+    public void setMessage(final String message)
+    {
+        this.message = message;
+    }
+
+    public String getResolveMessage()
+    {
+        return resolveMessage;
+    }
+
+    public void setResolveMessage(final String resolveMessage)
+    {
+        this.resolveMessage = resolveMessage;
     }
 }
