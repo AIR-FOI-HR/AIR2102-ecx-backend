@@ -13,7 +13,7 @@ public class Material
     private Long materialNumber;
 
     @ManyToMany(mappedBy = "materials")
-    private Set<Order> orders = new HashSet<Order>();
+    private Set<Order> orders = new HashSet<>();
 
     @Column(name = "name")
     private String name;

@@ -1,6 +1,7 @@
 package com.ecxfoi.wbl.wienerbergerbackend.mapper;
 
 import com.ecxfoi.wbl.wienerbergerbackend.dto.UserDto;
+import com.ecxfoi.wbl.wienerbergerbackend.exceptions.*;
 import com.ecxfoi.wbl.wienerbergerbackend.model.User;
 
 public class UserMapper implements GenericMapper<UserDto, User>
@@ -26,7 +27,7 @@ public class UserMapper implements GenericMapper<UserDto, User>
     }
 
     @Override
-    public User map(final UserDto dto) throws Exception
+    public User map(final UserDto dto) throws InvalidTitleException, InvalidNameException, InvalidPhoneNumberException, InvalidEmailException
     {
         if (dto == null)
         {

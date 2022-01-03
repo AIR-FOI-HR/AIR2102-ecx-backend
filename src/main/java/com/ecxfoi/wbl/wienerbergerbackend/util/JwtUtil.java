@@ -18,7 +18,7 @@ public class JwtUtil
     @Autowired
     UserRepository userRepository;
 
-    final private String SECRET_KEY = "5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjX";
+    private static final String SECRET_KEY = "5u8x/A%D*G-KaPdSgVkYp3s6v9y$B&E(H+MbQeThWmZq4t7w!z%C*F-J@NcRfUjX";
 
     public Long validateAndExtractID(String token)
     {
@@ -41,20 +41,20 @@ public class JwtUtil
         return Jwts.parser().setSigningKey(SECRET_KEY).parseClaimsJws(token).getBody();
     }
 
-    private Boolean isTokenExpired(String token)
+    private boolean isTokenExpired(String token)
     {
         return extractExpiration(token).before(new Date());
     }
 
-    public String generateToken(Long ID)
+    public String generateToken(Long id)
     {
         Map<String, Object> claims = new HashMap<>();
-        return Jwts.builder().setClaims(claims).setSubject(ID.toString()).setIssuedAt(new Date(System.currentTimeMillis()))
+        return Jwts.builder().setClaims(claims).setSubject(id.toString()).setIssuedAt(new Date(System.currentTimeMillis()))
                 .setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60 * 10))
                 .signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
     }
 
-    public Boolean validateToken(String token)
+    public boolean validateToken(String token)
     {
         final Long ID = validateAndExtractID(token);
         return (userRepository.findById(ID).isPresent() && !isTokenExpired(token));

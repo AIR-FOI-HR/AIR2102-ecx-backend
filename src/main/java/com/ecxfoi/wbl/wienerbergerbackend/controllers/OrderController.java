@@ -5,6 +5,7 @@ import com.ecxfoi.wbl.wienerbergerbackend.dto.OrderDto;
 import com.ecxfoi.wbl.wienerbergerbackend.dto.OrderStatusDto;
 import com.ecxfoi.wbl.wienerbergerbackend.response.WienerbergerResponse;
 import com.ecxfoi.wbl.wienerbergerbackend.service.OrderService;
+import com.ecxfoi.wbl.wienerbergerbackend.util.Constants;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -23,21 +24,21 @@ public class OrderController
         this.orderService = orderService;
     }
 
-    @RequestMapping(value = "/api/orders/{customerId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getOrdersForACustomer(@PathVariable Long customerId)
+    @GetMapping(value = "/api/orders/{customerId}")
+    public ResponseEntity<WienerbergerResponse<List<OrderDto>>> getOrdersForACustomer(@PathVariable Long customerId)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
 
         if (idJWT == null)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, Constants.INVALID_CREDENTIALS, null));
         }
 
         try
         {
             List<OrderDto> customerOrders = orderService.getOrdersForACustomer(idJWT, customerId);
-            return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", customerOrders));
+            return ResponseEntity.ok(new WienerbergerResponse<>(true, Constants.SUCCESS, customerOrders));
         }
         catch (Exception ex)
         {
@@ -46,27 +47,27 @@ public class OrderController
         }
     }
 
-    @RequestMapping(value = "/api/orders/details/{orderId}", method = RequestMethod.GET)
-    public ResponseEntity<?> getOrderDetails(@PathVariable Long orderId)
+    @GetMapping(value = "/api/orders/details/{orderId}")
+    public ResponseEntity<WienerbergerResponse<OrderDetailsDto>> getOrderDetails(@PathVariable Long orderId)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
 
         if (idJWT == null)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, Constants.INVALID_CREDENTIALS, null));
         }
 
         try
         {
             OrderDetailsDto orderDetails = orderService.getOrderDetails(idJWT, orderId);
 
-            if(orderDetails == null)
+            if (orderDetails == null)
             {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "You are not authorized to get details of this order!", null));
             }
 
-            return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", orderDetails));
+            return ResponseEntity.ok(new WienerbergerResponse<>(true, Constants.SUCCESS, orderDetails));
         }
         catch (Exception ex)
         {
@@ -75,22 +76,22 @@ public class OrderController
         }
     }
 
-    @RequestMapping(value = "/api/orders/{orderId}", method = RequestMethod.PUT)
-    public ResponseEntity<?> updateOrderStatus(@PathVariable Long orderId, @RequestBody OrderStatusDto orderStatusDto)
+    @PutMapping(value = "/api/orders/{orderId}")
+    public ResponseEntity<WienerbergerResponse<?>> updateOrderStatus(@PathVariable Long orderId, @RequestBody OrderStatusDto orderStatusDto)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
 
         if (idJWT == null)
         {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Invalid credentials!", null));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, Constants.INVALID_CREDENTIALS, null));
         }
 
         orderStatusDto.setId(orderId);
 
         try
         {
-            if(!orderService.updateOrderStatus(idJWT, orderStatusDto))
+            if (!orderService.updateOrderStatus(idJWT, orderStatusDto))
             {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "You are not authorized to edit other user's orders!", null));
             }
@@ -101,7 +102,7 @@ public class OrderController
         {
             ex.printStackTrace();
 
-            if(ex instanceof NullPointerException)
+            if (ex instanceof NullPointerException)
             {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Order with supplied ID doesn't exist!", null));
             }

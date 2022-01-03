@@ -1,6 +1,7 @@
 package com.ecxfoi.wbl.wienerbergerbackend.mapper;
 
 import com.ecxfoi.wbl.wienerbergerbackend.dto.OrderDetailsDto;
+import com.ecxfoi.wbl.wienerbergerbackend.exceptions.InvalidMappingException;
 import com.ecxfoi.wbl.wienerbergerbackend.model.Order;
 import org.springframework.stereotype.Component;
 
@@ -29,7 +30,7 @@ public class OrderDetailsMapper implements GenericMapper<OrderDetailsDto, Order>
     }
 
     @Override
-    public Order map(final OrderDetailsDto dto) throws Exception
+    public Order map(final OrderDetailsDto dto) throws InvalidMappingException
     {
         if (dto == null)
         {

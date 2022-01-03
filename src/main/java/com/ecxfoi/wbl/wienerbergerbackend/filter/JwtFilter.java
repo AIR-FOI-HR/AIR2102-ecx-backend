@@ -42,16 +42,13 @@ public class JwtFilter extends OncePerRequestFilter
             try
             {
                 id = jwtUtil.validateAndExtractID(jwt);
-                if (id != null && SecurityContextHolder.getContext().getAuthentication() == null)
+                if (id != null && SecurityContextHolder.getContext().getAuthentication() == null && jwtUtil.validateToken(jwt))
                 {
-                    if (jwtUtil.validateToken(jwt))
-                    {
-                        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
-                                id, null, null);
-                        usernamePasswordAuthenticationToken
-                                .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-                        SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
-                    }
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                            id, null, null);
+                    usernamePasswordAuthenticationToken
+                            .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
                 }
             }
             catch (Exception ex)
