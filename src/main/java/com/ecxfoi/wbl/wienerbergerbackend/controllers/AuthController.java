@@ -25,7 +25,7 @@ public class AuthController
     }
 
     @PostMapping(value = "/api/login")
-    public ResponseEntity<?> loginUser(@RequestBody AuthenticationRequest authenticationRequest)
+    public ResponseEntity<WienerbergerResponse<?>> loginUser(@RequestBody AuthenticationRequest authenticationRequest)
     {
         try
         {

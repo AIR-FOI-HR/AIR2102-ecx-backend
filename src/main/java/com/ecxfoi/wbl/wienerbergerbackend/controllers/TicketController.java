@@ -24,7 +24,7 @@ public class TicketController
     }
 
     @GetMapping(value = "/api/tickets")
-    public ResponseEntity<?> getTickets()
+    public ResponseEntity<WienerbergerResponse<List<TicketDto>>> getTickets()
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
@@ -47,7 +47,7 @@ public class TicketController
     }
 
     @GetMapping(value = "/api/tickets/{id}")
-    public ResponseEntity<?> getDetailsForTicket(@PathVariable final Long id)
+    public ResponseEntity<WienerbergerResponse<TicketDto>> getDetailsForTicket(@PathVariable final Long id)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
@@ -76,7 +76,7 @@ public class TicketController
     }
 
     @PostMapping(value = "/api/tickets")
-    public ResponseEntity<?> createNewTicket(@RequestBody TicketDto ticketDto)
+    public ResponseEntity<WienerbergerResponse<TicketDto>> createNewTicket(@RequestBody TicketDto ticketDto)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;

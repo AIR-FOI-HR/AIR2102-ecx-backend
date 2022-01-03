@@ -25,7 +25,7 @@ public class OrderController
     }
 
     @GetMapping(value = "/api/orders/{customerId}")
-    public ResponseEntity<?> getOrdersForACustomer(@PathVariable Long customerId)
+    public ResponseEntity<WienerbergerResponse<List<OrderDto>>> getOrdersForACustomer(@PathVariable Long customerId)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
@@ -48,7 +48,7 @@ public class OrderController
     }
 
     @GetMapping(value = "/api/orders/details/{orderId}")
-    public ResponseEntity<?> getOrderDetails(@PathVariable Long orderId)
+    public ResponseEntity<WienerbergerResponse<OrderDetailsDto>> getOrderDetails(@PathVariable Long orderId)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
@@ -62,7 +62,7 @@ public class OrderController
         {
             OrderDetailsDto orderDetails = orderService.getOrderDetails(idJWT, orderId);
 
-            if(orderDetails == null)
+            if (orderDetails == null)
             {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "You are not authorized to get details of this order!", null));
             }
@@ -77,7 +77,7 @@ public class OrderController
     }
 
     @PutMapping(value = "/api/orders/{orderId}")
-    public ResponseEntity<?> updateOrderStatus(@PathVariable Long orderId, @RequestBody OrderStatusDto orderStatusDto)
+    public ResponseEntity<WienerbergerResponse<?>> updateOrderStatus(@PathVariable Long orderId, @RequestBody OrderStatusDto orderStatusDto)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
@@ -91,7 +91,7 @@ public class OrderController
 
         try
         {
-            if(!orderService.updateOrderStatus(idJWT, orderStatusDto))
+            if (!orderService.updateOrderStatus(idJWT, orderStatusDto))
             {
                 return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "You are not authorized to edit other user's orders!", null));
             }
@@ -102,7 +102,7 @@ public class OrderController
         {
             ex.printStackTrace();
 
-            if(ex instanceof NullPointerException)
+            if (ex instanceof NullPointerException)
             {
                 return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Order with supplied ID doesn't exist!", null));
             }

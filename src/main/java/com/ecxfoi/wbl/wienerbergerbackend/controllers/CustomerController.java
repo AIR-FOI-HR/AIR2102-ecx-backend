@@ -25,7 +25,7 @@ public class CustomerController
     }
 
     @GetMapping(value = "/api/companies")
-    public ResponseEntity<?> getCompanies()
+    public ResponseEntity<WienerbergerResponse<List<CustomerDto>>> getCompanies()
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;

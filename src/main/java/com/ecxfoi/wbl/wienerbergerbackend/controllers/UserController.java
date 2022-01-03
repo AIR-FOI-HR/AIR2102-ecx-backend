@@ -22,7 +22,7 @@ public class UserController
     }
 
     @GetMapping(value = "api/user")
-    public ResponseEntity<?> getUser()
+    public ResponseEntity<WienerbergerResponse<UserDto>> getUser()
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
@@ -45,7 +45,7 @@ public class UserController
     }
 
     @PutMapping(value = "api/user")
-    public ResponseEntity<?> updateUser(@RequestBody UserDto userDto)
+    public ResponseEntity<WienerbergerResponse<?>> updateUser(@RequestBody UserDto userDto)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
         Long idJWT = context != null ? (Long) context.getPrincipal() : null;
