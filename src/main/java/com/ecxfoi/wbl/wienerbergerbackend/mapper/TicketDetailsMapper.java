@@ -1,31 +1,33 @@
 package com.ecxfoi.wbl.wienerbergerbackend.mapper;
 
-import com.ecxfoi.wbl.wienerbergerbackend.dto.TicketDto;
+import com.ecxfoi.wbl.wienerbergerbackend.dto.TicketDetailsDto;
 import com.ecxfoi.wbl.wienerbergerbackend.model.Ticket;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TicketMapper implements GenericMapper<TicketDto, Ticket>
+public class TicketDetailsMapper implements GenericMapper<TicketDetailsDto, Ticket>
 {
     @Override
-    public TicketDto mapDto(final Ticket entity)
+    public TicketDetailsDto mapDto(final Ticket entity)
     {
         if (entity == null)
         {
             return null;
         }
 
-        TicketDto ticketDto = new TicketDto();
+        TicketDetailsDto ticketDto = new TicketDetailsDto();
 
         ticketDto.setId(entity.getIdTicket());
         ticketDto.setSubject(entity.getSubject());
         ticketDto.setStatus(entity.getStatus());
+        ticketDto.setMessage(entity.getMessage());
+        ticketDto.setResolveMessage(entity.getResolveMessage());
 
         return ticketDto;
     }
 
     @Override
-    public Ticket map(final TicketDto dto)
+    public Ticket map(final TicketDetailsDto dto)
     {
         if (dto == null)
         {
@@ -37,6 +39,8 @@ public class TicketMapper implements GenericMapper<TicketDto, Ticket>
         ticket.setIdTicket(dto.getId());
         ticket.setSubject(dto.getSubject());
         ticket.setStatus(dto.getStatus());
+        ticket.setMessage(dto.getMessage());
+        ticket.setResolveMessage(dto.getResolveMessage());
 
         return ticket;
     }
