@@ -34,7 +34,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             "/api/tickets",
             "/api/tickets/**",
             "/api/orders",
-            "/api/orders/**"
+            "/api/orders/**",
+            "/api/materials",
+            "/api/materials/**"
     };
 
     @Override
