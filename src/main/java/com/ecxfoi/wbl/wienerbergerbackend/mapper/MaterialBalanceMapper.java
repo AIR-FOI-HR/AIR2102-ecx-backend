@@ -26,7 +26,7 @@ public class MaterialBalanceMapper implements GenericMapper<MaterialBalanceDto, 
     }
 
     @Override
-    public Material map(final MaterialBalanceDto dto) throws Exception
+    public Material map(final MaterialBalanceDto dto)
     {
         if (dto == null)
         {
