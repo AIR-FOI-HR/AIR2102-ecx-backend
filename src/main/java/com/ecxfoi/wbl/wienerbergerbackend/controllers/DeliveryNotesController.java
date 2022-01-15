@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +47,7 @@ public class DeliveryNotesController
         catch (Exception ex)
         {
             ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Delivery Note not found!", null));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Delivery note with specified ID doesn’t exist.", null));
         }
     }
 
@@ -67,10 +68,15 @@ public class DeliveryNotesController
 
             return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", deliveryNotesDto));
         }
+        catch (ParseException ex)
+        {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, ex.getMessage(), null));
+        }
         catch (Exception ex)
         {
             ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Delivery Notes not found!", null));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "No delivery notes for a specified time period.", null));
         }
     }
 
@@ -94,7 +100,7 @@ public class DeliveryNotesController
         catch (Exception ex)
         {
             ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Delivery Notes not found!", null));
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Delivery note with specified order number doesn’t exist.", null));
         }
     }
 }

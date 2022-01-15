@@ -4,6 +4,7 @@ import com.ecxfoi.wbl.wienerbergerbackend.dto.DeliveryNotesDto;
 import com.ecxfoi.wbl.wienerbergerbackend.mapper.DeliveryNotesMapper;
 import com.ecxfoi.wbl.wienerbergerbackend.model.DeliveryNotes;
 import com.ecxfoi.wbl.wienerbergerbackend.repository.DeliveryNotesRepository;
+import javassist.NotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -31,7 +32,7 @@ public class DeliveryNotesService
     }
 
 
-    public List<DeliveryNotesDto> getAllByDates(String start, String end) throws ParseException
+    public List<DeliveryNotesDto> getAllByDates(String start, String end) throws ParseException, NotFoundException
     {
         Date dateStart = new SimpleDateFormat("yyyy-MM-dd").parse(start);
         Date dateEnd = new SimpleDateFormat("yyyy-MM-dd").parse(end);
@@ -40,15 +41,21 @@ public class DeliveryNotesService
         return getDeliveryNotesDtos(deliveryList);
     }
 
-    public List<DeliveryNotesDto> getAllByOrderId(Long id)
+    public List<DeliveryNotesDto> getAllByOrderId(Long id) throws NotFoundException
     {
-        ArrayList<DeliveryNotes> deliveryList = (ArrayList<DeliveryNotes>) deliveryNotesRepository.getAllByOrderIdOrder(id);
-        return getDeliveryNotesDtos(deliveryList);
+        ArrayList<DeliveryNotes> delivery = (ArrayList<DeliveryNotes>) deliveryNotesRepository.getAllByOrderIdOrder(id);
+
+        return getDeliveryNotesDtos(delivery);
     }
 
-    private ArrayList<DeliveryNotesDto> getDeliveryNotesDtos(final ArrayList<DeliveryNotes> deliveryList)
+    private ArrayList<DeliveryNotesDto> getDeliveryNotesDtos(final ArrayList<DeliveryNotes> deliveryList) throws NotFoundException
     {
         ArrayList<DeliveryNotesDto> deliveryNotesDtos = new ArrayList<>();
+
+        if (deliveryList.isEmpty())
+        {
+            throw new NotFoundException("Empty list passed");
+        }
 
         for (DeliveryNotes deliveryNotes : deliveryList)
         {
