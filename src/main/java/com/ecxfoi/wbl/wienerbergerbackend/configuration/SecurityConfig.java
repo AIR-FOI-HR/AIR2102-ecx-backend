@@ -36,7 +36,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter
             "/api/orders",
             "/api/orders/**",
             "/api/materials",
-            "/api/materials/**"
+            "/api/materials/**",
+            "/api/deliveries",
+            "/api/deliveries/dates/**",
+            "/api/deliveries/**"
     };
 
     @Override
