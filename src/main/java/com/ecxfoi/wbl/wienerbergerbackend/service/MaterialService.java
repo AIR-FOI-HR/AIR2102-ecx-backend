@@ -34,35 +34,34 @@ public class MaterialService
     {
         User user = userRepository.findUserById(userId);
 
-        if (!user.getCustomers().contains(customerRepository.getById(customerId)))
+
+        List<MaterialBalanceDto> materialBalanceDtos = new ArrayList<>();
+
+        Customer selectedCompany = customerRepository.getById(customerId);
+
+        if (!user.getCustomers().contains(selectedCompany))
         {
             throw new RuntimeException("User with id " + userId + "not added to customer with id " + customerId + ".");
         }
 
-        List<MaterialBalanceDto> materialBalanceDtos = new ArrayList<>();
+        List<Order> orders = orderRepository.findAllByCustomerPONumber(selectedCompany);
 
-        Customer selectedCompany = customerRepository.getAllByUsers(user).stream().filter(c -> c.getId().equals(customerId)).findAny().orElse(null);
-        if (selectedCompany != null)
+        for (Order order : orders)
         {
-            List<Order> orders = orderRepository.findAllByCustomerPONumber(selectedCompany);
-
-            for (Order order : orders)
+            for (Material material : order.getMaterials())
             {
-                for (Material material : order.getMaterials())
+                if (materialBalanceDtos.stream().noneMatch(dto -> dto.getMaterialNumber().equals(material.getMaterialNumber())))
                 {
-                    if (materialBalanceDtos.stream().noneMatch(dto -> dto.getMaterialNumber().equals(material.getMaterialNumber())))
-                    {
-                        materialBalanceDtos.add(materialBalanceMapper.mapDto(material));
-                    }
-                    else
-                    {
-                        materialBalanceDtos.stream()
-                                .filter(dto -> dto.getMaterialNumber().equals(material.getMaterialNumber()))
-                                .forEach(dto -> {
-                                    int newQuantity = dto.getQuantity() + material.getQuantity();
-                                    dto.setQuantity(newQuantity);
-                                });
-                    }
+                    materialBalanceDtos.add(materialBalanceMapper.mapDto(material));
+                }
+                else
+                {
+                    materialBalanceDtos.stream()
+                            .filter(dto -> dto.getMaterialNumber().equals(material.getMaterialNumber()))
+                            .forEach(dto -> {
+                                int newQuantity = dto.getQuantity() + material.getQuantity();
+                                dto.setQuantity(newQuantity);
+                            });
                 }
             }
         }
