@@ -24,7 +24,7 @@ public class MaterialBalanceController
         this.materialService = materialService;
     }
 
-    @RequestMapping(value = "/api/companies/materials/{customerId}", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/companies/{customerId}/materials", method = RequestMethod.GET)
     public ResponseEntity<WienerbergerResponse<List<MaterialBalanceDto>>> getMaterialBalanceForUser(@PathVariable Long customerId)
     {
         Authentication context = SecurityContextHolder.getContext().getAuthentication();
