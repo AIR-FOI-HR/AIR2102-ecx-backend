@@ -7,7 +7,6 @@ import com.ecxfoi.wbl.wienerbergerbackend.model.Material;
 import com.ecxfoi.wbl.wienerbergerbackend.model.Order;
 import com.ecxfoi.wbl.wienerbergerbackend.model.User;
 import com.ecxfoi.wbl.wienerbergerbackend.repository.CustomerRepository;
-import com.ecxfoi.wbl.wienerbergerbackend.repository.MaterialRepository;
 import com.ecxfoi.wbl.wienerbergerbackend.repository.OrderRepository;
 import com.ecxfoi.wbl.wienerbergerbackend.repository.UserRepository;
 import org.springframework.stereotype.Service;
@@ -18,15 +17,13 @@ import java.util.List;
 @Service
 public class MaterialService
 {
-    private final MaterialRepository materialRepository;
     private final UserRepository userRepository;
     private final OrderRepository orderRepository;
     private final CustomerRepository customerRepository;
     private final MaterialBalanceMapper materialBalanceMapper;
 
-    public MaterialService(MaterialRepository materialRepository, UserRepository userRepository, OrderRepository orderRepository, CustomerRepository customerRepository, MaterialBalanceMapper materialBalanceMapper)
+    public MaterialService(UserRepository userRepository, OrderRepository orderRepository, CustomerRepository customerRepository, MaterialBalanceMapper materialBalanceMapper)
     {
-        this.materialRepository = materialRepository;
         this.userRepository = userRepository;
         this.orderRepository = orderRepository;
         this.customerRepository = customerRepository;
@@ -36,6 +33,12 @@ public class MaterialService
     public List<MaterialBalanceDto> getMaterialsForCustomer(Long userId, Long customerId)
     {
         User user = userRepository.findUserById(userId);
+
+        if (!user.getCustomers().contains(customerRepository.getById(customerId)))
+        {
+            throw new RuntimeException("User with id " + userId + "not added to customer with id " + customerId + ".");
+        }
+
         List<MaterialBalanceDto> materialBalanceDtos = new ArrayList<>();
 
         Customer selectedCompany = customerRepository.getAllByUsers(user).stream().filter(c -> c.getId().equals(customerId)).findAny().orElse(null);

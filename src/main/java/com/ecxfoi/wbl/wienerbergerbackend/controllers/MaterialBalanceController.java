@@ -46,10 +46,15 @@ public class MaterialBalanceController
 
             return ResponseEntity.ok(new WienerbergerResponse<>(true, "Success!", materialBalanceDtos));
         }
+        catch (RuntimeException ex)
+        {
+            ex.printStackTrace();
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new WienerbergerResponse<>(false, "Can't access this customer's materials! Logged in user not added to customer.", null));
+        }
         catch (Exception ex)
         {
             ex.printStackTrace();
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(new WienerbergerResponse<>(false, "Materials not found!", null));
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(new WienerbergerResponse<>(false, "Materials not found!", null));
         }
     }
 }
